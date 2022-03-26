@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import store from "./redux/store";
+import PokemonDetail from "./pages/PokemonDetail";
+import PokemonList from "./pages/PokemonList";
+import { BottomNav } from "./components";
+import "./App.css";
+import SearchPage from "./pages/SearchPage";
+import { MyPokemonList } from "./pages";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<PokemonList />} />
+            <Route path="/pokemon/:name" element={<PokemonDetail />} />
+            <Route path="/mine" element={<MyPokemonList />} />
+            <Route path="/search" element={<SearchPage />} />
+          </Routes>
+          <nav id="bottom-navigation" style={{ paddingBottom: 70 }}>
+            <BottomNav />
+          </nav>
+        </div>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
