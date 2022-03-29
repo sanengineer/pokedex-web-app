@@ -1,4 +1,13 @@
 import {
+  addCollectionAction,
+  addCollectionSuccessType,
+  addCollectionFailedType,
+  deleteCollectionAction,
+  deleteCollectionSuccessType,
+  deleteCollectionFailedType,
+} from "./mineCollection";
+
+import {
   getAllPokemonAction,
   getAllPokemonStart,
   getAllPokemonSuccess,
@@ -13,4 +22,10 @@ export {
   getAllPokemonFail,
   loadMoreStart,
   loadMoreFail,
+  addCollectionAction,
+  addCollectionSuccessType,
+  addCollectionFailedType,
+  deleteCollectionAction,
+  deleteCollectionSuccessType,
+  deleteCollectionFailedType,
 };

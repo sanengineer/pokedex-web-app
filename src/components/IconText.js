@@ -1,19 +1,44 @@
 import React from "react";
 import { Space } from "antd";
-import { Text, StyleSheet, View } from "react-native-web";
+import { Text, StyleSheet, View } from "react-native";
+import { COLORS, FONTS } from "../assets";
+import Spacer from "./Spacer";
 
-const _label = StyleSheet.create({
+const _label = StyleSheet.compose({
   container: {
-    fontSize: 12,
+    // backgroundColor: "aqua",
   },
+  text: (color, fontFamily, fontSize) => ({
+    fontSize: fontSize,
+    color: color,
+    fontFamily: fontFamily,
+    // backgroundColor: "red",
+  }),
 });
 
-const IconText = ({ icon, label }) => {
+const IconText = ({ icon, label, color, fontFamily, fontSize, spacer = 4 }) => {
   return (
-    <Space direction={`vertical`} align={`center`}>
-      {React.createElement(icon)}
-      <Text style={_label.container}>{label}</Text>
-    </Space>
+    <View
+      style={{
+        alignItems: "center",
+        flexDirection: "column",
+        // backgroundColor: "red",
+      }}
+    >
+      <View
+        style={
+          {
+            // backgroundColor: "green"
+          }
+        }
+      >
+        {React.createElement(icon)}
+      </View>
+      <Spacer height={spacer} />
+      <View style={_label.container}>
+        <Text style={_label.text(color, fontFamily, fontSize)}>{label}</Text>
+      </View>
+    </View>
   );
 };
 

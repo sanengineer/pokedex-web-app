@@ -6,25 +6,24 @@ import PokemonDetail from "./pages/PokemonDetail";
 import PokemonList from "./pages/PokemonList";
 import { BottomNav } from "./components";
 import "./App.css";
+import "antd/dist/antd.css";
+import "react-toastify/dist/ReactToastify.css";
 import SearchPage from "./pages/SearchPage";
 import { MyPokemonList } from "./pages";
+
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import { Desktop, Mobile } from "./device";
+import { isMobile } from "react-device-detect";
+
+const history = createBrowserHistory({ window });
 
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<PokemonList />} />
-            <Route path="/pokemon/:name" element={<PokemonDetail />} />
-            <Route path="/mine" element={<MyPokemonList />} />
-            <Route path="/search" element={<SearchPage />} />
-          </Routes>
-          <nav id="bottom-navigation" style={{ paddingBottom: 70 }}>
-            <BottomNav />
-          </nav>
-        </div>
-      </BrowserRouter>
+      <HistoryRouter history={history}>
+        {isMobile ? <Mobile /> : <Desktop />}
+      </HistoryRouter>
     </Provider>
   );
 }

@@ -1,37 +1,43 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import { useNavigate, useHref } from "react-router";
-import { COLORS } from "../assets";
+import { COLORS, FONTS } from "../assets";
 
-const height = 50;
-
-const styles = StyleSheet.create({
-  container: {
-    // backgroundColor: "cyan",
+const styles = StyleSheet.compose({
+  container: (color, height) => ({
     borderRadius: height * 0.2,
     overflow: "hidden",
-  },
-  constainerSearch: {
+    borderColor: color,
+    borderWidth: 1,
+    // backgroundColor: "cyan",
+  }),
+  containerSearch: (height, fontSize) => ({
     backgroundColor: COLORS.white,
     height: height,
     padding: 10,
-  },
-  text: {
+    fontFamily: FONTS.bold,
+    borderRadius: height * 0.2,
+    fontSize: fontSize,
+  }),
+  text: (fontSize) => ({
     backgroundColor: "#fff",
-  },
+    fontFamily: FONTS.regular,
+    fontSize: fontSize,
+  }),
 });
 
-const SearchBar = () => {
+const SearchBar = ({ color = COLORS.white, height = 30, fontSize = 10 }) => {
   const navigation = useNavigate();
   const onSelectionChange = () => {
     navigation("../search", { replace: true });
   };
   return (
-    <View style={styles.container}>
+    <View style={styles.container(color, height)}>
       <TextInput
-        placeholder="Search"
-        style={styles.constainerSearch}
+        placeholder="Search Pokemon Here.."
+        style={styles.containerSearch(height, fontSize)}
         onSelectionChange={onSelectionChange}
+        placeholderTextColor={COLORS.grey100}
       />
     </View>
   );

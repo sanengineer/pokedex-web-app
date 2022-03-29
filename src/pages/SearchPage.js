@@ -1,40 +1,64 @@
-import React from "react";
-import { SearchBar, Spacer } from "../components";
 import { LeftSquareOutlined } from "@ant-design/icons";
-import { TouchableOpacity, View } from "react-native";
+import React from "react";
+import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { useNavigate } from "react-router";
+import { COLORS } from "../assets";
+import { SearchBar, Spacer } from "../components";
 
-const SearchPage = () => {
-  const navigate = useNavigate();
-  const onPressBack = () => {
-    navigate("../");
-  };
-  return (
-    <View style={{ flex: 1 }}>
-      <View
-        style={{
-          flexDirection: "row",
-          backgroundColor: "green",
-          paddingVertical: 10,
-          paddingHorizontal: 10,
-          position: "fixed",
-          width: "100%",
-        }}
-      >
-        <View style={{ backgroundColor: "purple" }}>
-          <TouchableOpacity onPress={onPressBack} style={{ padding: 10 }}>
-            <LeftSquareOutlined style={{ fontSize: 30 }} />
-          </TouchableOpacity>
+const SearchPage = {
+  Mobile: () => {
+    const navigate = useNavigate();
+    const onPressBack = () => {
+      navigate("../");
+    };
+    return (
+      <View style={styles.container}>
+        <View style={styles.subContainer}>
+          <View style={styles.containerBack}>
+            <TouchableOpacity onPress={onPressBack} style={{ padding: 10 }}>
+              <LeftSquareOutlined style={styles.iconBack} />
+            </TouchableOpacity>
+          </View>
+          <Spacer width={10} />
+          <View style={styles.containerSearch}>
+            <SearchBar color={COLORS.grey} />
+          </View>
         </View>
-        <Spacer width={10} />
-        <View style={{ backgroundColor: "red", flex: 1 }}>
-          <SearchBar />
-        </View>
+        <Spacer height={30} />
+        <div>Search</div>
       </View>
-      <Spacer height={30} />
-      <div>Search</div>
-    </View>
-  );
+    );
+  },
+  Desktop: () => {
+    return (
+      <View>
+        <Text>Halo</Text>
+      </View>
+    );
+  },
 };
+
+const styles = StyleSheet.compose({
+  container: { flex: 1 },
+  subContainer: {
+    flexDirection: "row",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    position: "fixed",
+    width: "100%",
+    backgroundColor: COLORS.white,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.grey,
+    // backgroundColor: "green",
+  },
+  containerSearch: {
+    flex: 1,
+    // backgroundColor: "red",
+  },
+  containerBack: {
+    // backgroundColor: "purple"
+  },
+  iconBack: { fontSize: 30, color: COLORS.grey200 },
+});
 
 export default SearchPage;

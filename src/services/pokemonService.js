@@ -15,9 +15,9 @@ class PokemonServices {
       : api.get(`/pokemon`);
   }
 
-  //   fetchPostDetails(postId) {
-  //     return api.get(`/post/${postId}`);
-  //   }
+  fetchPokemonDetail(name) {
+    return api.get(`/pokemon/${name}`);
+  }
 
   //   latestPostUser = (user_id) => {
   //     return api.get(`/posts/${user_id}`);
