@@ -18,7 +18,7 @@ const Mobile = () => {
         <Route path="/search" element={<SearchPage.Mobile />} />
       </Routes>
       <nav id="bottom-navigation" style={{ paddingBottom: 70 }}>
-        <BottomNav />
+        <BottomNav.Mobile />
       </nav>
     </div>
   );

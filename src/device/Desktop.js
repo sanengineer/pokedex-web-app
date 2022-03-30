@@ -17,6 +17,9 @@ const Desktop = () => {
         <Route path="/mine" element={<MyPokemonList.Desktop />} />
         <Route path="/search" element={<SearchPage.Desktop />} />
       </Routes>
+      <nav id="bottom-navigation" style={{ paddingBottom: 70 }}>
+        <BottomNav.Desktop />
+      </nav>
     </div>
   );
 };

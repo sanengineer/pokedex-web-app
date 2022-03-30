@@ -515,6 +515,10 @@ const PokemonDetail = {
     const onPressHome = () => {
       navigate("..");
     };
+    
+    const onPressBack = () => {
+      history.back();
+    };
 
     const onPressAdd = () => {
       // addCollectionItem();
@@ -650,9 +654,9 @@ const PokemonDetail = {
                       }}
                     >
                       <View style={{ height: 30 }}>
-                        <Buttons.DesktopSquareHome
+                        <Buttons.DesktopBack
                           match={match}
-                          onPressHome={onPressHome}
+                          onPressBack={onPressBack}
                         />
                       </View>
                       <Spacer width={10} />

@@ -3,6 +3,7 @@ import {
   HomeOutlined,
   PlusOutlined,
   DeleteOutlined,
+  LeftOutlined,
 } from "@ant-design/icons";
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native-web";
@@ -49,6 +50,29 @@ const Buttons = {
               <HomeFilled style={_detailDesktop.icon(COLORS.yellowHero)} />
             ) : (
               <HomeOutlined style={_detailDesktop.icon(COLORS.grey100)} />
+            )
+          }
+        />
+      </TouchableOpacity>
+    );
+  },
+  DesktopBack: ({ onPressBack, match }) => {
+    return (
+      <TouchableOpacity
+        onPress={onPressBack}
+        style={_detailDesktop.containerTouch}
+      >
+        <IconText
+          fontFamily={FONTS.bold}
+          // label="Mine"
+          color={COLORS.grey100}
+          fontSize={8}
+          spacer={2}
+          icon={() =>
+            match.pathname === "/" ? (
+              <LeftOutlined style={_detailDesktop.icon(COLORS.yellowHero)} />
+            ) : (
+              <LeftOutlined style={_detailDesktop.icon(COLORS.grey100)} />
             )
           }
         />
