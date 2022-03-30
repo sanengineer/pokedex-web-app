@@ -141,12 +141,12 @@ const PokemonList = {
     };
 
     //debug_all
-    // console.log("ALL_POKEMON: ", all_pokemon.data);
+    console.log("ALL_POKEMON: ", all_pokemon.data);
     // console.log("OFFSET: ", offset);
     // console.log("WINDOWS_SCREEN_X: ", window.screen.width);
     // console.log("WINDOWS_SCREEN_Y: ", window.screen.height);
     // console.log("LOCATION: ", location);
-    console.log("DEVICE:", isMobile);
+    // console.log("DEVICE:", isMobile);
 
     return (
       <View style={_homeDesktop.container(_zIndexBase)}>

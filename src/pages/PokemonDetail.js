@@ -20,8 +20,11 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import Dexie from "dexie";
+import { useLiveQuery } from "dexie-react-hooks";
 import useVibrant from "useVibrant";
+
 import { COLORS, FONTS, SIZES, _detailDesktop, _detailMobile } from "../assets";
 import {
   Buttons,
@@ -34,10 +37,17 @@ import {
   StatItem,
   TextTitle,
   Toaster,
+  Modals,
 } from "../components";
 import history from "../helper/history";
-import { addCollectionAction, deleteCollectionAction } from "../redux/actions";
+import {
+  addCollectionAction,
+  deleteCollectionAction,
+  deleteCollectionSuccessType,
+  setCollectionDefaultType,
+} from "../redux/actions";
 import pokemonService from "../services/pokemonService";
+import { db } from "../db";
 
 const { TabPane } = Tabs;
 
@@ -97,16 +107,30 @@ const PokemonDetail = {
         cancelText: "Cancel",
         onOk() {
           console.log("OK");
-          dispatch(
-            deleteCollectionAction({
-              id: match.state.id,
-              image_url: resultData.sprites.front_default,
-              name: resultData.species.name,
-            })
-          );
-          navigate("../mine");
+          deleteCollectionItemOnDb();
+          // dispatch(
+          //   deleteCollectionAction({
+          //     id: match.state.id,
+          //     image_url: resultData.sprites.front_default,
+          //     name: resultData.species.name,
+          //   })
+          // );
+          // navigate("../mine");
         },
       });
+    };
+
+    const deleteCollectionItemOnDb = async () => {
+      try {
+        const deleteItem = await db.mine_collection
+          .where("id")
+          .equals(match.state.id_obj)
+          .delete();
+        console.log("DELETE ITEM: " + deleteItem);
+        alert(`${deleteItem} item deleted`);
+      } catch (error) {
+        alert(`Error ${error}`);
+      }
     };
 
     const { colors, done } = useVibrant(`${match.state.link}`);
@@ -398,6 +422,15 @@ const PokemonDetail = {
     const navigate = useNavigate();
     const [offset, setOffset] = useState(0);
     const [resultData, setResultData] = useState();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [unableToAdd, setUnableToAdd] = useState(true);
+    const [pokemonItem, setPokemonItem] = useState({
+      name: "",
+      image_url: "",
+      id_pokemon: "",
+      nickname: "",
+    });
+    const mine_collection_redux = useSelector((state) => state.mine_collection);
     const getName = match.pathname.split("/")[2];
     const getFromPathName = match.state.from_pathname.split("/")[1];
     const _zIndexBase = 0;
@@ -420,6 +453,61 @@ const PokemonDetail = {
       return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
+    const addCollectionItem = async () => {
+      try {
+        const id = await db.mine_collection.add(pokemonItem);
+        toast.success(`${pokemonItem.name} successfully added ${id}`);
+      } catch (error) {
+        toast.error(
+          `failed to add ${pokemonItem.name}, please try different nickname`
+        );
+      }
+    };
+
+    const deleteCollectionItemOnDb = async () => {
+      try {
+        const deleteItem = await db.mine_collection
+          .where("id")
+          .equals(match.state.id_obj)
+          .delete();
+        console.log("DELETE ITEM: " + deleteItem);
+        // alert(`${deleteItem} item deleted`);
+      } catch (error) {
+        alert(`Error ${error}`);
+      }
+    };
+
+    const showModal = () => {
+      setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+      setIsModalVisible(false);
+      addCollectionItem().then(() => {
+        dispatch(setCollectionDefaultType());
+      });
+    };
+
+    const handleCancel = () => {
+      setIsModalVisible(false);
+    };
+
+    const handleChange = (e) => {
+      //debug
+      console.log("E", e.nativeEvent.text);
+      if (e.nativeEvent.text.length > 0) {
+        setPokemonItem({
+          nickname: e.nativeEvent.text,
+          name: mine_collection_redux.data.name,
+          image_url: mine_collection_redux.data.image_url,
+          id_pokemon: mine_collection_redux.data.id,
+        });
+        setUnableToAdd(false);
+      } else {
+        setUnableToAdd(true);
+      }
+    };
+
     const onPressMine = () => {
       navigate("../mine");
     };
@@ -429,6 +517,8 @@ const PokemonDetail = {
     };
 
     const onPressAdd = () => {
+      // addCollectionItem();
+      showModal();
       dispatch(
         addCollectionAction({
           id: match.state.id,
@@ -448,14 +538,13 @@ const PokemonDetail = {
         cancelText: "Cancel",
         onOk() {
           console.log("OK");
-          dispatch(
-            deleteCollectionAction({
-              id: match.state.id,
-              image_url: resultData.sprites.front_default,
-              name: resultData.species.name,
+          deleteCollectionItemOnDb()
+            .then(() => {
+              navigate("../mine");
             })
-          );
-          navigate("../mine");
+            .then(() => {
+              dispatch(deleteCollectionSuccessType());
+            });
         },
       });
     };
@@ -463,11 +552,14 @@ const PokemonDetail = {
     const { colors, done } = useVibrant(`${match.state.link}`);
 
     //debug_all
-    // console.log("ALL_POKEMON: ", all_pokemon.data);
+    console.log("POKEMON_DETAIL: ", resultData);
+    console.log("MINE_COLLECTION_REDUX: ", mine_collection_redux);
     // console.log("OFFSET: ", offset);
     // console.log("WINDOWS_SCREEN_X: ", window.screen.width);
     // console.log("WINDOWS_SCREEN_Y: ", window.screen.height);
     console.log("LOCATION: ", match);
+    console.log("PAYLOAD_DB:", pokemonItem);
+    // console.log("MODAL:", isModalVisible);
     // console.log("DEVICE:", isMobile);
 
     return (
@@ -573,6 +665,8 @@ const PokemonDetail = {
                             )}
                           >
                             {resultData.species.name}
+                            {match.state.nickname !== undefined &&
+                              ` (${match.state.nickname})`}
                           </Text>
                         </View>
                       </View>
@@ -802,6 +896,16 @@ const PokemonDetail = {
         )}
         <Spacer height={240} />
         <Toaster.Desktop />
+        <Modals
+          onCancel={handleCancel}
+          onOk={handleOk}
+          visible={isModalVisible}
+          card_id={mine_collection_redux.data.id}
+          card_name={mine_collection_redux.data.name}
+          bgColor={COLORS.white}
+          disabled={unableToAdd}
+          onChange={(e) => handleChange(e)}
+        />
       </View>
     );
   },

@@ -10,6 +10,7 @@ import TextTitle from "./TextTitle";
 import StatItem from "./StatItem";
 import Section from "./Section";
 import Toaster from "./Toaster";
+import Modals from "./Modals";
 
 export {
   CardItem,
@@ -24,4 +25,5 @@ export {
   StatItem,
   Section,
   Toaster,
+  Modals,
 };

@@ -6,13 +6,8 @@ const Toaster = {
   Desktop: () => (
     <ToastContainer
       style={{
-        width: window.screen.width - SIZES.pagePadding * 2,
-        paddingVertical: 10,
-        left: 20,
-        top: 10,
-        fontFamily: FONTS.bold,
-        borderRadius: 10,
-        overflow: "hidden",
+        maxWidth: SIZES.maxWidthContentInt,
+        width: SIZES.maxWidthContentInt - SIZES.maxWidthContentInt / 3,
       }}
       position="top-center"
       autoClose={5000}

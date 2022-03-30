@@ -1,4 +1,5 @@
 import {
+  setCollectionDefaultType,
   addCollectionAction,
   addCollectionSuccessType,
   addCollectionFailedType,
@@ -22,6 +23,7 @@ export {
   getAllPokemonFail,
   loadMoreStart,
   loadMoreFail,
+  setCollectionDefaultType,
   addCollectionAction,
   addCollectionSuccessType,
   addCollectionFailedType,

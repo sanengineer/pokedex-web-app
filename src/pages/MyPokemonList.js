@@ -17,12 +17,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useLiveQuery } from "dexie-react-hooks";
 import { COLORS, FONTS, SIZES } from "../assets";
 import {
   Buttons,
   CardItem,
   Header,
   IconText,
+  LoadingIndicator,
   SearchBar,
   Spacer,
   Toaster,
@@ -32,6 +34,7 @@ import {
   getAllPokemonAction,
 } from "../redux/actions";
 import { getAllPokemonActionMore } from "../redux/actions/getAllPokemon";
+import { db } from "../db";
 
 const MyPokemonList = {
   Mobile: () => {
@@ -127,7 +130,8 @@ const MyPokemonList = {
     const _ratio_window = window.screen.width / window.screen.height;
     const _widhtHeader = _ratio_window * 100;
     const maxWidthMainNav = SIZES.maxWidthBar;
-    const mine_collection = useSelector((state) => state.mine_collection);
+    const mine_collection_redux = useSelector((state) => state.mine_collection);
+    const mine_collection = useLiveQuery(() => db.mine_collection.toArray());
 
     useEffect(() => {
       const onScroll = () => setOffset(window.scrollY);
@@ -138,10 +142,10 @@ const MyPokemonList = {
     }, []);
 
     useEffect(() => {
-      if (mine_collection.success.delete === true) {
+      if (mine_collection_redux.success.delete === true) {
         toast.error("success delete from collection", options);
       }
-    }, [mine_collection.success.delete]);
+    }, [mine_collection_redux.success.delete]);
 
     const onPressMine = () => {
       navigate("../mine");
@@ -160,8 +164,9 @@ const MyPokemonList = {
     // console.log("OFFSET: ", offset);
     // console.log("WINDOWS_SCREEN_X: ", window.screen.width);
     // console.log("WINDOWS_SCREEN_Y: ", window.screen.height);
-    console.log("LOCATION: ", match);
+    // console.log("LOCATION: ", match);
     // console.log("DEVICE:", isMobile);
+    console.log("DB:", mine_collection);
 
     return (
       <View style={_homeDesktop.container(_zIndexBase)}>
@@ -335,25 +340,28 @@ const MyPokemonList = {
         )}
         <Spacer height={240} />
         <View style={_homeDesktop.containerCards(_zIndexBase)}>
-          {mine_collection.loading ? (
-            <ActivityIndicator size={`large`} color={COLORS.yellowHero} />
+          {mine_collection === undefined ? (
+            <LoadingIndicator />
           ) : (
-            mine_collection.data.map((item, index) => (
+            mine_collection.map((item, index) => (
               <View
                 key={`${item.name}_${item.id}`}
                 style={{
                   flexShrink: 1,
                   flexGrow: 1,
-                  flexBasis: 110,
+                  flexBasis: 120,
                   flexDirection: "row",
                 }}
               >
                 <CardItem
                   name={item.name}
-                  id={item.id}
+                  id={item.id_pokemon}
+                  id_obj={item.id}
                   height={130}
                   fontSize={10}
                   widthImg={70}
+                  isNickname={true}
+                  nickname={item.nickname}
                 />
               </View>
             ))
@@ -474,7 +482,7 @@ const _homeDesktop = StyleSheet.compose({
   containerCards: (_zIndexBase) => ({
     padding: SIZES.pagePadding - 10,
     zIndex: _zIndexBase,
-    maxWidth: SIZES.maxWidthContent,
+    maxWidth: SIZES.maxWidthContentInt,
     margin: "auto",
     flexDirection: "row",
     flexWrap: "wrap",

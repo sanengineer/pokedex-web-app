@@ -3,35 +3,25 @@ import * as actionTypes from "../constants";
 import { toast } from "react-toastify";
 
 const search = (key, arr) => {
-  //debug
-  // console.log("search", key, arr);
-
   return arr.filter((item) => {
     return item.id === parseInt(key);
   });
-
-  // for (let i = 0; i < arr.length; i++) {
-  //   if (arr[i].id === key) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
 };
 
 const removeOne = (arr, obj) => {
-  //debug
-  // console.log("removeOne", key, arr);
-  // const index = arr.indexOf((obj) => obj.id === _obj.id);
-  // const index = arr.findIndex((obj) => obj.id !== _obj.id);
-  // console.log("ARR_BEFORE_REMOVE_ONE", arr);
-
   const _array = arr.filter((item) => item.id !== obj.id);
-
   return _array;
 };
 
+export const setCollectionDefaultType = () => ({
+  type: actionTypes.SET_COLLECTION_DEFAULT,
+});
+
 export const addCollectionAction = (params) => (dispatch) => {
+  return dispatch(addCollectionSuccessType(params));
+};
+
+export const addCollectionActionV1 = (params) => (dispatch) => {
   const array = store.getState().mine_collection.data;
   if (search(params.id, array).length == 0) {
     // console.log("SUCCESS_ADD_COLLECTION");
@@ -44,7 +34,11 @@ export const addCollectionAction = (params) => (dispatch) => {
   }
 };
 
-export const deleteCollectionAction = (params) => (dispatch) => {
+export const deleteCollectionAction = () => (dispatch) => {
+  return dispatch(deleteCollectionSuccessType());
+};
+
+export const deleteCollectionActionV1 = (params) => (dispatch) => {
   console.log("DELETE_COLLECTION_SUCCESS_TYPE", params);
   const array = store.getState().mine_collection.data;
   const new_obj = removeOne(array, params);
@@ -60,7 +54,11 @@ export const addCollectionFailedType = () => ({
   type: actionTypes.ADD_COLLECTION_FAILED,
 });
 
-export const deleteCollectionSuccessType = (params) => ({
+export const deleteCollectionSuccessType = () => ({
+  type: actionTypes.DELETE_COLLECTION_SUCCESS,
+});
+
+export const deleteCollectionSuccessTypeV1 = (params) => ({
   type: actionTypes.DELETE_COLLECTION_SUCCESS,
   payload: params,
 });

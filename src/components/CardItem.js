@@ -12,6 +12,9 @@ export const CardItem = ({
   fontSize = 18,
   style,
   widthImg,
+  isNickname = false,
+  nickname,
+  id_obj,
 }) => {
   const navigate = useNavigate();
   const _id = parseInt(id);
@@ -22,6 +25,8 @@ export const CardItem = ({
         from_pathname: window.location.pathname,
         id: _id,
         link: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${_id}.png`,
+        nickname: nickname,
+        id_obj: id_obj,
       },
     });
   };
@@ -60,6 +65,9 @@ export const CardItem = ({
       </View>
       <View style={_label.container}>
         <Text style={_label.text(done, colors, fontSize)}>{name}</Text>
+        {isNickname && (
+          <Text style={_label.subtext(done, colors, 8)}>({nickname})</Text>
+        )}
       </View>
       {/* </View> */}
     </TouchableOpacity>
@@ -122,7 +130,16 @@ const _label = StyleSheet.compose({
     fontSize: fontSize,
     // color: done ? colors.DarkVibrant.hex : COLORS.black,
     color: done ? COLORS.white : COLORS.black,
-    fontFamily: FONTS.bold,
+    fontFamily: FONTS.extrabold,
+    textAlign: "center",
+  }),
+  subtext: (done, colors, fontSize) => ({
+    marginTop: 4,
+    textTransform: "capitalize",
+    fontSize: fontSize,
+    // color: done ? colors.DarkVibrant.hex : COLORS.black,
+    color: done ? COLORS.white : COLORS.black,
+    fontFamily: FONTS.medium,
     textAlign: "center",
   }),
 });
