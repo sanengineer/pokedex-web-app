@@ -1,12 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { BottomNav } from "../components";
-import {
-  MyPokemonList,
-  PokemonDetail,
-  PokemonList,
-  SearchPage,
-} from "../pages";
+import { MyPokemonList, PokemonDetail, PokemonList } from "../pages";
 
 const Mobile = () => {
   return (
@@ -15,7 +10,6 @@ const Mobile = () => {
         <Route path="/" element={<PokemonList.Mobile />} />
         <Route path="/pokemon/:name" element={<PokemonDetail.Mobile />} />
         <Route path="/mine" element={<MyPokemonList.Mobile />} />
-        <Route path="/search" element={<SearchPage.Mobile />} />
       </Routes>
       <nav id="bottom-navigation" style={{ paddingBottom: 70 }}>
         <BottomNav.Mobile />
