@@ -1,15 +1,29 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { TextTitle, Spacer } from "../components";
 import { COLORS, SIZES } from "../assets";
 
-const LoadingIndicator = () => {
+const LoadingIndicator = ({ color = COLORS.grey500 }) => {
   return (
-    <>
-      <ActivityIndicator size={`large`} color={COLORS.grey500} />
-      <Spacer height={10} />
-      <TextTitle fontSize={12} title={`Loading...`} color={COLORS.grey500} />
-    </>
+    <div>
+      <View
+        style={{
+          maxWidth: SIZES.maxWidthContentInt,
+          margin: "auto",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size={`large`} color={color} />
+        <Spacer height={10} />
+        <TextTitle
+          fontSize={12}
+          title={`Loading...`}
+          color={color}
+          textAlign={`center`}
+        />
+      </View>
+    </div>
   );
 };
 

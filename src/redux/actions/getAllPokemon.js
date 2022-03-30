@@ -1,5 +1,6 @@
 import * as actionTypes from "../constants";
 import PokemonService from "../../services/pokemonService";
+import { loadMoreStart } from "./loadMore";
 
 const getPathUrl = (url) => {
   const pattern_url = url.split("//");
@@ -35,6 +36,7 @@ export const getAllPokemonAction = () => (dispatch) => {
 };
 
 export const getAllPokemonActionMore = (params) => (dispatch) => {
+  dispatch(loadMoreStart());
   PokemonService.fetchAllPokemon(params)
     .then((res) => {
       dispatch(getAllPokemonMore(dataManipulate(res.data.results)));

@@ -6,15 +6,27 @@ import {
   LeftOutlined,
 } from "@ant-design/icons";
 import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native-web";
+import { StyleSheet, TouchableOpacity, Text } from "react-native-web";
 import { COLORS, FONTS, _detailDesktop } from "../assets";
 import IconText from "./IconText";
 
 const _buttonLG = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    width: 150,
+    width: 80,
     height: 30,
+    alignItem: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: COLORS.grey,
+    // backgroundColor: "red",
+  },
+  label: {
+    textAlign: "center",
+    fontSize: 12,
+    fontFamily: FONTS.medium,
+    color: COLORS.grey200,
   },
 });
 
@@ -22,7 +34,7 @@ const Buttons = {
   LG: (props) => {
     return (
       <TouchableOpacity onPress={props.onPress} style={_buttonLG.container}>
-        {props.label}
+        <Text style={_buttonLG.label}>{props.label}</Text>
       </TouchableOpacity>
     );
   },
@@ -39,7 +51,7 @@ const Buttons = {
         onPress={onPressHome}
         style={_detailDesktop.containerTouch}
       >
-        <IconText
+        <IconText.V
           fontFamily={match.pathname === "/" ? FONTS.extrabold : FONTS.bold}
           // label="Mine"
           color={match.pathname === "/" ? COLORS.yellowHero : COLORS.grey100}
@@ -62,7 +74,7 @@ const Buttons = {
         onPress={onPressBack}
         style={_detailDesktop.containerTouch}
       >
-        <IconText
+        <IconText.V
           fontFamily={FONTS.bold}
           // label="Mine"
           color={COLORS.grey100}
@@ -85,7 +97,7 @@ const Buttons = {
         onPress={onPressAdd}
         style={_detailDesktop.containerTouch}
       >
-        <IconText
+        <IconText.V
           fontFamily={match.pathname === "/mine" ? FONTS.extrabold : FONTS.bold}
           // label="Mine"
           color={
@@ -93,9 +105,7 @@ const Buttons = {
           }
           fontSize={8}
           spacer={2}
-          icon={() => (
-            <PlusOutlined style={_detailDesktop.icon(COLORS.grey100)} />
-          )}
+          icon={() => <PlusOutlined style={_detailDesktop.icon("green")} />}
         />
       </TouchableOpacity>
     );
@@ -106,7 +116,7 @@ const Buttons = {
         onPress={onPressDelete}
         style={_detailDesktop.containerTouch}
       >
-        <IconText
+        <IconText.V
           fontFamily={match.pathname === "/mine" ? FONTS.extrabold : FONTS.bold}
           // label="Mine"
           color={
@@ -114,9 +124,7 @@ const Buttons = {
           }
           fontSize={8}
           spacer={2}
-          icon={() => (
-            <DeleteOutlined style={_detailDesktop.icon(COLORS.grey100)} />
-          )}
+          icon={() => <DeleteOutlined style={_detailDesktop.icon("red")} />}
         />
       </TouchableOpacity>
     );

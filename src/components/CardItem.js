@@ -46,7 +46,7 @@ export const CardItem = ({
         <Text
           style={{
             fontSize: 50,
-            color: COLORS.white,
+            color: done ? COLORS.white : COLORS.grey,
             opacity: 0.5,
             fontFamily: FONTS.extrabold,
             letterSpacing: -5,

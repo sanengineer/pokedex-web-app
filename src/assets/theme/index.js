@@ -4,6 +4,7 @@ export const SIZES = {
   maxWidthBar: 1280,
   maxWidthContent: "970px",
   maxWidthContentInt: 970,
+  maxWidthContentDetailInt: 540,
 };
 
 export const COLORS = {

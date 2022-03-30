@@ -129,7 +129,7 @@ const BottomNav = {
                   onPress={onPressHome}
                   style={styles.containerTouch}
                 >
-                  <IconText
+                  <IconText.V
                     label="Home"
                     fontFamily={
                       match.pathname === "/" ? FONTS.extrabold : FONTS.regular
@@ -155,7 +155,7 @@ const BottomNav = {
                   onPress={onPressMine}
                   style={styles.containerTouch}
                 >
-                  <IconText
+                  <IconText.V
                     fontFamily={
                       match.pathname === "/mine"
                         ? FONTS.extrabold
@@ -216,7 +216,7 @@ const BottomNav = {
                   onPress={onPressHome}
                   style={styles.containerTouch}
                 >
-                  <IconText
+                  <IconText.V
                     label="Home"
                     fontFamily={
                       match.pathname === "/" ? FONTS.extrabold : FONTS.regular
@@ -242,7 +242,7 @@ const BottomNav = {
                   onPress={onPressMine}
                   style={styles.containerTouch}
                 >
-                  <IconText
+                  <IconText.V
                     fontFamily={
                       match.pathname === "/mine"
                         ? FONTS.extrabold
@@ -304,7 +304,7 @@ const BottomNav = {
                     onPress={onPressHome}
                     style={_desktopNav.containerTouch}
                   >
-                    <IconText
+                    <IconText.V
                       label="Home"
                       fontFamily={
                         match.pathname === "/" ? FONTS.extrabold : FONTS.regular
@@ -333,7 +333,7 @@ const BottomNav = {
                     onPress={onPressMine}
                     style={_desktopNav.containerTouch}
                   >
-                    <IconText
+                    <IconText.V
                       fontFamily={
                         match.pathname === "/mine"
                           ? FONTS.extrabold

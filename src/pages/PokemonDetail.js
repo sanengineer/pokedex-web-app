@@ -1,11 +1,8 @@
 import {
   DeleteOutlined,
   ExclamationCircleOutlined,
-  HomeFilled,
-  HomeOutlined,
   LeftSquareOutlined,
   PlusCircleOutlined,
-  PlusOutlined,
 } from "@ant-design/icons";
 import { Modal, Tabs, Tag } from "antd";
 import React, { useEffect, useState } from "react";
@@ -20,63 +17,49 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
-import { ToastContainer, toast } from "react-toastify";
-import Dexie from "dexie";
-import { useLiveQuery } from "dexie-react-hooks";
+import { toast } from "react-toastify";
 import useVibrant from "useVibrant";
-
 import { COLORS, FONTS, SIZES, _detailDesktop, _detailMobile } from "../assets";
 import {
   Buttons,
   Header,
-  IconText,
   LoadingIndicator,
-  SearchBar,
+  Modals,
   Section,
   Spacer,
   StatItem,
   TextTitle,
   Toaster,
-  Modals,
 } from "../components";
+import { db } from "../db";
 import history from "../helper/history";
 import {
   addCollectionAction,
-  deleteCollectionAction,
   deleteCollectionSuccessType,
   setCollectionDefaultType,
 } from "../redux/actions";
 import pokemonService from "../services/pokemonService";
-import { db } from "../db";
 
 const { TabPane } = Tabs;
 
 const PokemonDetail = {
   Mobile: () => {
     const match = useLocation();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [resultData, setResultData] = useState();
-    const [objectData, setObjectData] = useState([]);
     const getName = match.pathname.split("/")[2];
     const getFromPathName = match.state.from_pathname.split("/")[1];
     const [visibleModal, setVisibleModal] = useState(false);
-    const mine_collection = useSelector((state) => state.mine_collection);
 
     useEffect(() => {
       pokemonService
         .fetchPokemonDetail(getName)
         .then((res) => {
           setResultData(res.data);
-          setObjectData(Object.keys(res.data));
         })
         .catch((err) => {
           console.log("ERROR:" + err);
         });
-
-      // return () => {
-      //   second
-      // }
     }, []);
 
     const toggleModal = () => {
@@ -106,16 +89,7 @@ const PokemonDetail = {
         okText: "OK",
         cancelText: "Cancel",
         onOk() {
-          console.log("OK");
           deleteCollectionItemOnDb();
-          // dispatch(
-          //   deleteCollectionAction({
-          //     id: match.state.id,
-          //     image_url: resultData.sprites.front_default,
-          //     name: resultData.species.name,
-          //   })
-          // );
-          // navigate("../mine");
         },
       });
     };
@@ -134,16 +108,6 @@ const PokemonDetail = {
     };
 
     const { colors, done } = useVibrant(`${match.state.link}`);
-
-    //debug_all
-    // console.log("PROPS: ", props);
-    // console.log("MATCH: ", match);
-    // console.log("DATA: ", resultData);
-    // console.log("COLOR: ", colors);
-    // console.log("DONE: ", done);
-    // console.log("MINE_COLLECTION: ", mine_collection.success);
-    console.log("WINDOW:", window.location.pathname);
-    // console.log("GET_FROM_PATHNAME:", getFromPathName);
 
     return (
       <View style={_detailMobile.container}>
@@ -207,24 +171,13 @@ const PokemonDetail = {
                 />
                 <View
                   style={{
-                    // backgroundColor: colors.DarkMuted.hex,
                     backgroundColor: colors.LightVibrant.hex,
-                    // backgroundColor: colors.DarkVibrant,,
-                    // backgroundColor: colors.LightMuted.hex,
-                    // backgroundColor: colors.Muted.hex,
-                    // backgroundColor:colors.Vibrant.hex,
                     width: "100%",
                     height:
                       window.screen.height / 2 - window.screen.height / 6 + 70,
-                    // opacity: 0.3,
                     zIndex: 0,
                   }}
-                >
-                  {/* <Image
-                source={resultData.sprites.front_default}
-                style={{ height: 80, width: 80, zIndex: 3 }}
-              /> */}
-                </View>
+                ></View>
               </>
             )}
             <View style={{ paddingHorizontal: SIZES.pagePadding }}>
@@ -420,7 +373,6 @@ const PokemonDetail = {
     const dispatch = useDispatch();
     const match = useLocation();
     const navigate = useNavigate();
-    const [offset, setOffset] = useState(0);
     const [resultData, setResultData] = useState();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [unableToAdd, setUnableToAdd] = useState(true);
@@ -436,7 +388,6 @@ const PokemonDetail = {
     const _zIndexBase = 0;
     const _ratio_window = window.screen.width / window.screen.height;
     const _widhtHeader = _ratio_window * 100;
-    const maxWidthMainNav = 900;
     useEffect(() => {
       pokemonService
         .fetchPokemonDetail(getName)
@@ -446,11 +397,6 @@ const PokemonDetail = {
         .catch((err) => {
           console.log("ERROR:" + err);
         });
-      const onScroll = () => setOffset(window.scrollY);
-      // clean up code
-      window.removeEventListener("scroll", onScroll);
-      window.addEventListener("scroll", onScroll, { passive: true });
-      return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
     const addCollectionItem = async () => {
@@ -466,12 +412,10 @@ const PokemonDetail = {
 
     const deleteCollectionItemOnDb = async () => {
       try {
-        const deleteItem = await db.mine_collection
+        await db.mine_collection
           .where("id")
           .equals(match.state.id_obj)
           .delete();
-        console.log("DELETE ITEM: " + deleteItem);
-        // alert(`${deleteItem} item deleted`);
       } catch (error) {
         alert(`Error ${error}`);
       }
@@ -493,8 +437,6 @@ const PokemonDetail = {
     };
 
     const handleChange = (e) => {
-      //debug
-      console.log("E", e.nativeEvent.text);
       if (e.nativeEvent.text.length > 0) {
         setPokemonItem({
           nickname: e.nativeEvent.text,
@@ -508,20 +450,11 @@ const PokemonDetail = {
       }
     };
 
-    const onPressMine = () => {
-      navigate("../mine");
-    };
-
-    const onPressHome = () => {
-      navigate("..");
-    };
-    
     const onPressBack = () => {
       history.back();
     };
 
     const onPressAdd = () => {
-      // addCollectionItem();
       showModal();
       dispatch(
         addCollectionAction({
@@ -537,11 +470,10 @@ const PokemonDetail = {
       Modal.confirm({
         title: "Confirm",
         icon: <ExclamationCircleOutlined />,
-        content: "Bla bla ...",
-        okText: "OK",
-        cancelText: "Cancel",
+        content: "Are you sure for remove this Item ?",
+        okText: "Yes",
+        cancelText: "No",
         onOk() {
-          console.log("OK");
           deleteCollectionItemOnDb()
             .then(() => {
               navigate("../mine");
@@ -554,17 +486,6 @@ const PokemonDetail = {
     };
 
     const { colors, done } = useVibrant(`${match.state.link}`);
-
-    //debug_all
-    console.log("POKEMON_DETAIL: ", resultData);
-    console.log("MINE_COLLECTION_REDUX: ", mine_collection_redux);
-    // console.log("OFFSET: ", offset);
-    // console.log("WINDOWS_SCREEN_X: ", window.screen.width);
-    // console.log("WINDOWS_SCREEN_Y: ", window.screen.height);
-    console.log("LOCATION: ", match);
-    console.log("PAYLOAD_DB:", pokemonItem);
-    // console.log("MODAL:", isModalVisible);
-    // console.log("DEVICE:", isMobile);
 
     return (
       <View style={_detailDesktop.container(_zIndexBase)}>
@@ -580,15 +501,11 @@ const PokemonDetail = {
                   {resultData !== undefined ? (
                     <Image
                       source={resultData.sprites.front_default}
-                      style={{
-                        height: 120,
-                        width: 120,
-                        // backgroundColor: "red",
-                      }}
+                      style={_detailDesktop.imgHeader()}
                     />
                   ) : (
                     <>
-                      <LoadingIndicator />
+                      <LoadingIndicator color={COLORS.white} />
                     </>
                   )}
                 </>
@@ -596,309 +513,222 @@ const PokemonDetail = {
             }}
           />
         </View>
+        <Spacer height={240} />
         <>
           {resultData !== undefined ? (
-            <>
-              {offset > 157.5 ? (
-                <View style={_detailDesktop.containerBarFix(_zIndexBase)}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      maxWidth: `${maxWidthMainNav}px`,
-                      margin: "auto",
-                    }}
-                  >
-                    <View
-                      style={{ width: maxWidthMainNav - maxWidthMainNav / 2 }}
-                    >
-                      <SearchBar color={COLORS.grey} />
+            <div>
+              <View style={_detailDesktop.containerBarNonFix(_zIndexBase)}>
+                <View style={_detailDesktop.subContainerBarNonFix(_zIndexBase)}>
+                  <View style={_detailDesktop.subSubContainerBarNonFix()}>
+                    <View style={{ height: 30 }}>
+                      <Buttons.DesktopBack
+                        match={match}
+                        onPressBack={onPressBack}
+                      />
                     </View>
-                    <Spacer width={30} />
-                    <View style={{ flex: 1, backgroundColor: "red" }}>
-                      <TouchableOpacity
-                        onPress={onPressMine}
-                        style={_detailDesktop.containerTouch}
-                      >
-                        <IconText
-                          fontFamily={
-                            match.pathname === "/mine"
-                              ? FONTS.extrabold
-                              : FONTS.regular
-                          }
-                          label="Mine"
-                          color={
-                            match.pathname === "/mine"
-                              ? COLORS.yellowHero
-                              : COLORS.grey100
-                          }
-                          icon={() => (
-                            <DeleteOutlined
-                              style={_detailDesktop.icon(COLORS.grey100)}
-                            />
-                          )}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-              ) : (
-                <View style={_detailDesktop.containerBarNonFix(_zIndexBase)}>
-                  <View
-                    style={_detailDesktop.subContainerBarNonFix(_zIndexBase)}
-                  >
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        paddingHorizontal: maxWidthMainNav / 2.5,
-                        alignItems: "center",
-                      }}
-                    >
-                      <View style={{ height: 30 }}>
-                        <Buttons.DesktopBack
+                    <Spacer width={10} />
+                    <View style={{ height: 30 }}>
+                      {resultData !== undefined &&
+                      getFromPathName === "mine" ? (
+                        <Buttons.DesktopSquareDelete
                           match={match}
-                          onPressBack={onPressBack}
+                          onPressDelete={onPressDelete}
                         />
-                      </View>
-                      <Spacer width={10} />
-                      <View style={_detailDesktop.containerTitleDetail}>
-                        <View>
-                          <Text
-                            style={_detailDesktop.containerTitleDetailText(
-                              done,
-                              colors
-                            )}
-                          >
-                            {resultData.species.name}
-                            {match.state.nickname !== undefined &&
-                              ` (${match.state.nickname})`}
-                          </Text>
-                        </View>
-                      </View>
-                      <Spacer width={10} />
-                      <View style={{ height: 30 }}>
-                        {resultData !== undefined &&
-                        getFromPathName === "mine" ? (
-                          <Buttons.DesktopSquareDelete
-                            match={match}
-                            onPressDelete={onPressDelete}
-                          />
-                        ) : (
-                          <Buttons.DesktopSquareAdd
-                            match={match}
-                            onPressAdd={onPressAdd}
-                          />
-                        )}
-                      </View>
+                      ) : (
+                        <Buttons.DesktopSquareAdd
+                          match={match}
+                          onPressAdd={onPressAdd}
+                        />
+                      )}
+                    </View>
+                    <Spacer width={10} />
+                    <View style={_detailDesktop.containerIconTextH()}>
+                      <TextTitle
+                        title={resultData.species.name}
+                        fontSize={12}
+                        width={`100%`}
+                        textAlign={`center`}
+                        textTransform="capitalize"
+                      />
+                      {match.state.nickname !== undefined && (
+                        <TextTitle
+                          title={`|`}
+                          fontSize={12}
+                          width={`100%`}
+                          textAlign={`center`}
+                          color={COLORS.grey}
+                        />
+                      )}
+                      {match.state.nickname !== undefined && (
+                        <TextTitle
+                          width={`100%`}
+                          title={match.state.nickname}
+                          fontSize={10}
+                          color={COLORS.grey200}
+                        />
+                      )}
                     </View>
                   </View>
                 </View>
-              )}
-            </>
+              </View>
+            </div>
           ) : (
             <ActivityIndicator size={`large`} color={COLORS.white} />
           )}
         </>
         {resultData !== undefined ? (
-          <View
-            style={{
-              maxWidth: maxWidthMainNav,
-              paddingHorizontal: 200,
-              margin: "auto",
-            }}
-          >
-            <Spacer height={220} />
-            <View
-              style={{
-                // backgroundColor: "red",
-                borderRadius: 6,
-                borderWidth: 1,
-                borderColor: COLORS.grey,
-              }}
-            >
-              <Tabs
-                defaultActiveKey="1"
-                centered={true}
-                style={{ fontFamily: FONTS.bold }}
-              >
-                <TabPane tab="About" key="1">
-                  <ScrollView style={{ paddingHorizontal: 20 }}>
-                    <Section.H
-                      title={`Height`}
-                      fontSizeSection={14}
-                      component={() => {
-                        return (
-                          <View style={{ flexDirection: "row" }}>
-                            <TextTitle
-                              title={resultData.height}
-                              width={40}
-                              fontSize={14}
-                              color={COLORS.grey200}
-                            />
-                            <TextTitle
-                              title={`inch`}
-                              width={40}
-                              fontSize={14}
-                              color={COLORS.grey200}
-                            />
-                          </View>
-                        );
-                      }}
-                    />
-                    <Section.H
-                      title={`Weight`}
-                      fontSizeSection={14}
-                      component={() => {
-                        return (
-                          <View style={{ flexDirection: "row" }}>
-                            <TextTitle
-                              title={resultData.weight}
-                              width={40}
-                              fontSize={14}
-                              color={COLORS.grey200}
-                            />
-                            <TextTitle
-                              title={`lbs`}
-                              width={40}
-                              fontSize={14}
-                              color={COLORS.grey200}
-                            />
-                          </View>
-                        );
-                      }}
-                    />
-                    <Section.H
-                      fontSizeSection={14}
-                      title={`Base Exp`}
-                      component={() => {
-                        return (
-                          <TextTitle
-                            title={resultData.base_experience}
-                            fontSize={14}
-                            color={COLORS.grey200}
-                          />
-                        );
-                      }}
-                    />
-                    <Section.V
-                      title={`Ability`}
-                      fontSizeSection={14}
-                      component={() => {
-                        return (
-                          <View
-                            style={{
-                              flexDirection: "row",
-                              width: window.screen.width - 50,
-                              flexWrap: "wrap",
-                            }}
-                          >
-                            {resultData.abilities.map((item, index) => (
-                              <Tag color={`warning`}>{item.ability.name}</Tag>
-                            ))}
-                          </View>
-                        );
-                      }}
-                    />
-                    <Section.V
-                      title={`Types`}
-                      fontSizeSection={14}
-                      component={() => {
-                        return (
-                          <View
-                            style={{
-                              flexDirection: "row",
-                              width: window.screen.width - 50,
-                              flexWrap: "wrap",
-                            }}
-                          >
-                            {resultData.types.map((item, index) => (
-                              <Tag color={`warning`}>{item.type.name}</Tag>
-                            ))}
-                          </View>
-                        );
-                      }}
-                    />
-                  </ScrollView>
-                </TabPane>
-                <TabPane tab="Stats" key="2">
-                  <ScrollView
-                    style={{
-                      paddingHorizontal: 20,
-                    }}
-                  >
-                    <Section.V
-                      fontSizeSection={14}
-                      component={() => {
-                        return (
-                          <FlatList
-                            numColumns={3}
-                            keyExtractor={(item, index) => index.toString()}
-                            data={resultData.stats}
-                            renderItem={({ item, index }) => (
-                              <StatItem
-                                leftText={item.stat.name}
-                                rightText={item.base_stat}
+          <div>
+            <View style={_detailDesktop.containerTabs()}>
+              <View style={_detailDesktop.subContainerTabs()}>
+                <Tabs
+                  defaultActiveKey="1"
+                  centered={true}
+                  style={{ fontFamily: FONTS.bold }}
+                >
+                  <TabPane tab="About" key="1">
+                    <ScrollView style={{ paddingHorizontal: 20 }}>
+                      <Section.H
+                        title={`Height`}
+                        fontSizeSection={14}
+                        component={() => {
+                          return (
+                            <View style={{ flexDirection: "row" }}>
+                              <TextTitle
+                                title={resultData.height}
+                                width={40}
+                                fontSize={14}
+                                color={COLORS.grey200}
                               />
-                            )}
-                          />
-                        );
-                      }}
-                    />
-                  </ScrollView>
-                </TabPane>
-                <TabPane tab="Moves" key="3">
-                  <ScrollView
-                    style={{
-                      height: 500,
-                      paddingHorizontal: 20,
-                    }}
-                  >
-                    <Section.V
-                      // title={`Moves`}
-                      component={() => {
-                        return (
-                          <View
-                            style={{
-                              flexDirection: "row",
-                              minWidth: 200,
-                              flexWrap: "wrap",
-                            }}
-                          >
-                            {resultData.moves.map((item, index) => {
-                              const _move_name = item.move.name.replace(
-                                /-/g,
-                                " "
-                              );
-
-                              return (
-                                <View style={{ paddingVertical: 5 }}>
-                                  <Tag key={index} color={`warning`}>
-                                    {_move_name}
-                                  </Tag>
-                                </View>
-                              );
-                            })}
-                          </View>
-                        );
-                      }}
-                    />
-                  </ScrollView>
-                </TabPane>
-              </Tabs>
+                              <TextTitle
+                                title={`inch`}
+                                width={40}
+                                fontSize={14}
+                                color={COLORS.grey200}
+                              />
+                            </View>
+                          );
+                        }}
+                      />
+                      <Section.H
+                        title={`Weight`}
+                        fontSizeSection={14}
+                        component={() => {
+                          return (
+                            <View style={{ flexDirection: "row" }}>
+                              <TextTitle
+                                title={resultData.weight}
+                                width={40}
+                                fontSize={14}
+                                color={COLORS.grey200}
+                              />
+                              <TextTitle
+                                title={`lbs`}
+                                width={40}
+                                fontSize={14}
+                                color={COLORS.grey200}
+                              />
+                            </View>
+                          );
+                        }}
+                      />
+                      <Section.H
+                        fontSizeSection={14}
+                        title={`Base Exp`}
+                        component={() => {
+                          return (
+                            <TextTitle
+                              title={resultData.base_experience}
+                              fontSize={14}
+                              color={COLORS.grey200}
+                            />
+                          );
+                        }}
+                      />
+                      <Section.V
+                        title={`Ability`}
+                        fontSizeSection={14}
+                        component={() => {
+                          return (
+                            <View style={_detailDesktop.containerCompAbility()}>
+                              {resultData.abilities.map((item, index) => (
+                                <Tag color={`warning`}>{item.ability.name}</Tag>
+                              ))}
+                            </View>
+                          );
+                        }}
+                      />
+                      <Section.V
+                        title={`Types`}
+                        fontSizeSection={14}
+                        component={() => {
+                          return (
+                            <View style={_detailDesktop.containerCompTypes()}>
+                              {resultData.types.map((item, index) => (
+                                <Tag color={`warning`}>{item.type.name}</Tag>
+                              ))}
+                            </View>
+                          );
+                        }}
+                      />
+                    </ScrollView>
+                  </TabPane>
+                  <TabPane tab="Stats" key="2">
+                    <ScrollView style={_detailDesktop.containerSectionStat()}>
+                      <Section.V
+                        fontSizeSection={14}
+                        component={() => {
+                          return (
+                            <FlatList
+                              numColumns={3}
+                              keyExtractor={(item, index) => index.toString()}
+                              data={resultData.stats}
+                              renderItem={({ item, index }) => (
+                                <StatItem
+                                  leftText={item.stat.name}
+                                  rightText={item.base_stat}
+                                />
+                              )}
+                            />
+                          );
+                        }}
+                      />
+                    </ScrollView>
+                  </TabPane>
+                  <TabPane tab="Moves" key="3">
+                    <ScrollView style={_detailDesktop.containerSectionMove()}>
+                      <Section.V
+                        // title={`Moves`}
+                        component={() => {
+                          return (
+                            <View style={_detailDesktop.containerCompMove()}>
+                              {resultData.moves.map((item, index) => {
+                                const _move_name = item.move.name.replace(
+                                  /-/g,
+                                  " "
+                                );
+                                return (
+                                  <View style={{ paddingVertical: 5 }}>
+                                    <Tag key={index} color={`warning`}>
+                                      {_move_name}
+                                    </Tag>
+                                  </View>
+                                );
+                              })}
+                            </View>
+                          );
+                        }}
+                      />
+                    </ScrollView>
+                  </TabPane>
+                </Tabs>
+              </View>
             </View>
-          </View>
+          </div>
         ) : (
-          <View
-            style={{
-              backgroundColor: COLORS.grey,
-              alignItems: "center",
-              justifyContent: "center",
-              height: window.screen.height / 2 - window.screen.height / 6 + 70,
-            }}
-          >
+          <View style={_detailDesktop.containerLoadingIndicator()}>
             <LoadingIndicator />
           </View>
         )}
-        <Spacer height={240} />
         <Toaster.Desktop />
         <Modals
           onCancel={handleCancel}

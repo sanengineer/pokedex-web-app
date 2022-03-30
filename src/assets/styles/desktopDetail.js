@@ -17,23 +17,46 @@ export const _detailDesktop = StyleSheet.compose({
     borderBottomRightRadius: "100%",
     overflow: "hidden",
     position: "absolute",
-    transform: [{ translateX: -window.screen.width / 2 }],
-    width: window.screen.width * 2,
+    transform: [{ translateX: "-25%" }],
+    width: "200%",
+  }),
+
+  imgHeader: () => ({
+    height: 120,
+    width: 120,
+    // backgroundColor: "red",
   }),
 
   containerBarNonFix: (_zIndexBase) => ({
     zIndex: _zIndexBase + 2,
     position: "relative",
-    top: 200,
+    maxWidth: SIZES.maxWidthContentDetailInt,
+    padding: SIZES.pagePadding - 10,
+    margin: "auto",
     // backgroundColor: "green",
   }),
 
   subContainerBarNonFix: () => ({
-    paddingHorizontal: SIZES.pagePadding,
-    position: "absolute",
-    width: "100%",
-    top: -20,
-    // backgroundColor: "aqua",
+    paddingHorizontal: SIZES.pagePadding - 10,
+  }),
+
+  subSubContainerBarNonFix: () => ({
+    flexDirection: "row",
+    alignItems: "center",
+  }),
+
+  containerIconTextH: () => ({
+    height: 30,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: COLORS.grey,
+    paddingHorizontal: 6,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    // maxWidth: 300,
+    flex: 1,
+    // backgroundColor: "red",
   }),
 
   containerBarFix: (_zIndexBase) => ({
@@ -89,6 +112,52 @@ export const _detailDesktop = StyleSheet.compose({
     backgroundColor: COLORS.white,
     // backgroundColor: "green",
   },
+
+  containerTabs: () => ({
+    maxWidth: SIZES.maxWidthContentDetailInt,
+    paddingHorizontal: 20,
+    margin: "auto",
+  }),
+
+  subContainerTabs: () => ({
+    // backgroundColor: "red",
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: COLORS.grey,
+  }),
+
+  containerCompAbility: () => ({
+    flexDirection: "row",
+    width: window.screen.width - 50,
+    flexWrap: "wrap",
+  }),
+
+  containerCompTypes: () => ({
+    flexDirection: "row",
+    width: window.screen.width - 50,
+    flexWrap: "wrap",
+  }),
+
+  containerSectionStat: () => ({
+    paddingHorizontal: 10,
+  }),
+
+  containerSectionMove: () => ({
+    height: window.screen.height / 2.5 - window.screen.height / 10,
+    paddingHorizontal: 20,
+  }),
+
+  containerCompMove: () => ({
+    flexDirection: "row",
+    minWidth: 200,
+    flexWrap: "wrap",
+  }),
+
+  containerLoadingIndicator: () => ({
+    alignItems: "center",
+    justifyContent: "center",
+    height: window.screen.height / 2 - window.screen.height / 6 + 70,
+  }),
 
   icon: (color) => ({
     fontSize: 16,

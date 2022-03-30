@@ -16,30 +16,57 @@ const _label = StyleSheet.compose({
   }),
 });
 
-const IconText = ({ icon, label, color, fontFamily, fontSize, spacer = 4 }) => {
-  return (
-    <View
-      style={{
-        alignItems: "center",
-        flexDirection: "column",
-        // backgroundColor: "red",
-      }}
-    >
+const IconText = {
+  V: ({ icon, label, color, fontFamily, fontSize, spacer = 4 }) => {
+    return (
       <View
-        style={
-          {
-            // backgroundColor: "green"
-          }
-        }
+        style={{
+          alignItems: "center",
+          flexDirection: "column",
+          // backgroundColor: "red",
+        }}
       >
-        {React.createElement(icon)}
+        <View
+          style={
+            {
+              // backgroundColor: "green"
+            }
+          }
+        >
+          {React.createElement(icon)}
+        </View>
+        <Spacer height={spacer} />
+        <View style={_label.container}>
+          <Text style={_label.text(color, fontFamily, fontSize)}>{label}</Text>
+        </View>
       </View>
-      <Spacer height={spacer} />
-      <View style={_label.container}>
-        <Text style={_label.text(color, fontFamily, fontSize)}>{label}</Text>
+    );
+  },
+  H: ({ icon, label, color, fontFamily, fontSize, spacer = 4 }) => {
+    return (
+      <View
+        style={{
+          alignItems: "center",
+          flexDirection: "row",
+          // backgroundColor: "red",
+        }}
+      >
+        <View
+          style={
+            {
+              // backgroundColor: "green"
+            }
+          }
+        >
+          {React.createElement(icon)}
+        </View>
+        <Spacer width={spacer} />
+        <View style={_label.container}>
+          <Text style={_label.text(color, fontFamily, fontSize)}>{label}</Text>
+        </View>
       </View>
-    </View>
-  );
+    );
+  },
 };
 
 export default IconText;

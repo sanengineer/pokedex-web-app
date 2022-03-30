@@ -8,21 +8,33 @@ const TextTitle = ({
   color = COLORS.black,
   width = 80,
   fontFamily = FONTS.bold,
+  textAlign = "left",
+  textTransform,
 }) => {
   return (
-    <Text style={textTitle.text(fontSize, color, width, fontFamily)}>
+    <Text
+      style={textTitle.text(
+        fontSize,
+        color,
+        width,
+        fontFamily,
+        textAlign,
+        textTransform
+      )}
+    >
       {title}
     </Text>
   );
 };
 
 const textTitle = StyleSheet.compose({
-  text: (fontSize, color, width, fontFamily) => ({
+  text: (fontSize, color, width, fontFamily, textAlign, textTransform) => ({
     fontSize: fontSize,
-    textAlign: "left",
+    textAlign: textAlign,
     fontFamily: fontFamily,
     color: color,
     width: width,
+    textTransform: textTransform,
     // backgroundColor: "cyan",
   }),
 });

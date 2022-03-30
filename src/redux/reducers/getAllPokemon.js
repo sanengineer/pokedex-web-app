@@ -2,6 +2,7 @@ import * as actionTypes from "../constants";
 
 const initialState = {
   loading: false,
+  loading_more: false,
   error: null,
   data: [],
   total: 0,
@@ -27,10 +28,12 @@ export default function getAllPokemonReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        error: null,
-        data: [],
-        total: 0,
-        params: {},
+      };
+
+    case actionTypes.LOAD_MORE_START:
+      return {
+        ...state,
+        loading_more: true,
       };
     case actionTypes.GET_ALL_POKEMON_SUCCESS:
       return {
@@ -43,6 +46,7 @@ export default function getAllPokemonReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        loading_more: false,
         error: null,
         data: [...state.data, ...action.payload],
       };
