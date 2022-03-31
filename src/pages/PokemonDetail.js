@@ -242,7 +242,12 @@ const PokemonDetail = {
                 width: 200,
                 zIndex: 3,
                 top: 70 + 70 / 2,
-                transform: [{ translateX: window.screen.width / 2 / 2 }],
+                transform: [
+                  {
+                    translateX:
+                      (window.screen.width / 2) * 0.5 - SIZES.pagePadding,
+                  },
+                ],
                 position: "absolute",
                 // backgroundColor: "white",
               }}
@@ -286,7 +291,7 @@ const PokemonDetail = {
               )}
             </View>
 
-            <View style={{ paddingHorizontal: SIZES.pagePadding }}>
+            <View style={{ paddingHorizontal: SIZES.pagePadding, zIndex: 10 }}>
               <Tabs
                 defaultActiveKey="1"
                 centered={false}
