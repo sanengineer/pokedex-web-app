@@ -1,6 +1,6 @@
 {
   "short_name": "Pokedex",
-  "name": "Pokedex Web Platform",
+  "name": "Pokedex Lite",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,16 +8,28 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "pokedex_icon_x192_mask.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
+      "sizes": "192X192",
+      "purpose": "maskable"
     },
     {
-      "src": "logo512.png",
+      "src": "pokedex_icon_x192_any.png",
+      "type": "image/png",
+      "sizes": "192X192",
+      "purpose": "any"
+    },
+    {
+      "src": "pokedex_icon_x512_mask.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    },
+    {
+      "src": "pokedex_icon_x512_any.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
     }
   ],
   "start_url": "/",
