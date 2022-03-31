@@ -18,7 +18,8 @@ const Modals = ({
   disabled = false,
   isLoading,
   isSuccess,
-  maskClosable,
+  maskClosable = false,
+  closable = false,
 }) => {
   return (
     <Modal
@@ -31,7 +32,8 @@ const Modals = ({
       bodyStyle={{ width: 250, backgroundColor: bgColor }}
       style={{ width: 200, backgroundColor: "green" }}
       centered
-      maskClosable={maskClosable}
+      maskClosable={isLoading ? false : true}
+      closable={isLoading ? false : true}
     >
       {isLoading ? (
         <LoadingIndicator />
