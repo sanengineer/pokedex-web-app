@@ -221,7 +221,9 @@ const PokemonDetail = {
                 />
                 <View
                   style={{
-                    backgroundColor: colors.LightVibrant.hex,
+                    backgroundColor: done
+                      ? colors.LightVibrant.hex
+                      : COLORS.yellowHero,
                     width: "100%",
                     height:
                       window.screen.height / 2 - window.screen.height / 6 + 70,
