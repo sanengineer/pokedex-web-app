@@ -1,32 +1,27 @@
 @font-face {
-  font-family: "PlusJakartaSans-Regular", system-ui;
+  font-family: "PlusJakartaSans-Regular";
   src: url("../src/assets/fonts/PlusJakartaSans-Regular.woff")
     format("truetype");
-  font-display: "swap";
 }
 
 @font-face {
-  font-family: "PlusJakartaSans-Medium", system-ui;
+  font-family: "PlusJakartaSans-Medium";
   src: url("../src/assets/fonts/PlusJakartaSans-Medium.woff") format("truetype");
-  font-display: "swap";
 }
 
 @font-face {
-  font-family: "PlusJakartaSans-SemiBold", system-ui;
+  font-family: "PlusJakartaSans-SemiBold";
   src: url("../src/assets/fonts/PlusJakartaSans-SemiBold.woff")
     format("truetype");
-  font-display: "swap";
 }
 
 @font-face {
-  font-family: "PlusJakartaSans-Bold", system-ui;
+  font-family: "PlusJakartaSans-Bold";
   src: url("../src/assets/fonts/PlusJakartaSans-Bold.woff") format("truetype");
-  font-display: "swap";
 }
 
 @font-face {
-  font-family: "PlusJakartaSans-ExtraBold", system-ui;
+  font-family: "PlusJakartaSans-ExtraBold";
   src: url("../src/assets/fonts/PlusJakartaSans-ExtraBold.woff")
     format("truetype");
-  font-display: "swap";
 }
