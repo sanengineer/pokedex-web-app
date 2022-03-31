@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import React from "react";
-import { TextInput, View } from "react-native";
+import { TextInput, View } from "react-native-web";
 import { COLORS, FONTS } from "../assets";
 import { CardItem } from "./CardItem";
 import Spacer from "./Spacer";

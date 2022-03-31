@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, View } from "react-native-web";
 import { TextTitle, Spacer } from "../components";
 import { COLORS, SIZES } from "../assets";
 

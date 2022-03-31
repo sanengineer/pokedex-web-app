@@ -1,7 +1,7 @@
 import { PictureOutlined } from "@ant-design/icons";
 import { useLiveQuery } from "dexie-react-hooks";
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native-web";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { COLORS, FONTS, _homeDesktop, _mobileCollection } from "../assets";

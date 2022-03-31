@@ -14,7 +14,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from "react-native-web";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";

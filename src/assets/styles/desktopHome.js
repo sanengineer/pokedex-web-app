@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native-web";
 import { COLORS, SIZES } from "../theme";
 
 export const _homeDesktop = StyleSheet.compose({

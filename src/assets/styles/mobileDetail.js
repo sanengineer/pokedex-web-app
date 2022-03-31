@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native-web";
 import { COLORS, FONTS } from "../theme";
 
 export const _detailMobile = StyleSheet.compose({

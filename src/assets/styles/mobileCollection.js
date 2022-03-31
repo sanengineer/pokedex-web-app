@@ -1,5 +1,5 @@
 import { COLORS, SIZES, FONTS } from "../theme";
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native-web";
 
 export const _mobileCollection = StyleSheet.compose({
   container: (zIndex) => ({

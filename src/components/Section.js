@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native-web";
 import { Spacer, TextTitle } from "../components";
 
 const Section = {

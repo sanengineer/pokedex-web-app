@@ -5,7 +5,7 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native-web";
 import { useLocation, useNavigate } from "react-router";
 import { COLORS, FONTS } from "../assets";
 import { IconText } from "../components";

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native-web";
 import Spacer from "./Spacer";
 
 const _label = StyleSheet.compose({

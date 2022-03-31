@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native-web";
 import { useNavigate } from "react-router";
 import { COLORS, FONTS } from "../assets";
 

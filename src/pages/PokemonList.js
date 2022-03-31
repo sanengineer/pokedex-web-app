@@ -2,7 +2,7 @@ import { PictureOutlined } from "@ant-design/icons";
 import { Image } from "antd";
 import { useLiveQuery } from "dexie-react-hooks";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native-web";
 import { useDispatch, useSelector } from "react-redux";
 import { COLORS, FONTS, _homeDesktop, _homeMobile } from "../assets";
 import {

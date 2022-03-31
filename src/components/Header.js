@@ -1,6 +1,6 @@
 import { Image } from "antd";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native-web";
 import { COLORS } from "../assets";
 
 const _header = StyleSheet.compose({
