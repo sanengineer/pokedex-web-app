@@ -26,7 +26,10 @@ const MyPokemonList = {
     const dispatch = useDispatch();
     const [offset, setOffset] = useState(0);
     const _zIndexBase = 0;
-    const mine_collection = useSelector((state) => state.mine_collection);
+    const _ratio_window = window.screen.width / window.screen.height;
+    const _widhtHeader = _ratio_window * 100;
+    const mine_collection = useLiveQuery(() => db.mine_collection.toArray());
+    const mine_collection_redux = useSelector((state) => state.mine_collection);
 
     useEffect(() => {
       const onScroll = () => setOffset(window.scrollY);
@@ -39,33 +42,92 @@ const MyPokemonList = {
       const options = {
         onClose: () => dispatch(deleteCollectionFailedType()),
       };
-      if (mine_collection.success.delete === true) {
+      if (mine_collection_redux.success.delete === true) {
         toast.error("success delete from collection", options);
       }
-    }, [mine_collection.success.delete, dispatch]);
+    }, [mine_collection_redux.success.delete, dispatch]);
 
     return (
       <View style={_mobileCollection.container(_zIndexBase)}>
-        {offset > 30 ? (
-          <View style={_mobileCollection.containerSearchfix(_zIndexBase)}>
-            <Text style={_mobileCollection.containerHeaderTitle()}>
-              Mine Collection
-            </Text>
-          </View>
-        ) : (
-          <View style={_mobileCollection.containerSearchNonFix(_zIndexBase)}>
-            <View
-              style={_mobileCollection.subContainerSearchNonFix(_zIndexBase)}
-            >
-              <Text style={_mobileCollection.containerHeaderTitle()}>
+        <View style={_homeDesktop.containerHeader(_zIndexBase)}>
+          <Header
+            widthHeader={_widhtHeader}
+            top={-20}
+            isImage={false}
+            component={() => (
+              <Text style={_collectionDesktop.containerHeaderTitle()}>
                 Mine Collection
               </Text>
+            )}
+          />
+        </View>
+        {offset > 237.5 && (
+          <div>
+            <View style={_homeDesktop.containerBarFix(_zIndexBase)}>
+              <div>
+                <View style={_homeDesktop.subContainerBarFix()}>
+                  <View style={{ width: "100%" }}>
+                    <View style={_homeDesktop.subSubContainerBarFix()}>
+                      <TextTitle
+                        title={`Mine Collection`}
+                        fontSize={12}
+                        color={COLORS.yellowHero}
+                        fontFamily={FONTS.extrabold}
+                      />
+                      <View style={{ flex: 1 }} />
+                      <View style={_homeDesktop.containerIconTextH()}>
+                        <IconText.H
+                          icon={() => (
+                            <PictureOutlined
+                              style={{ fontSize: 20, color: COLORS.yellowHero }}
+                            />
+                          )}
+                          label={`${
+                            mine_collection === undefined
+                              ? "..."
+                              : mine_collection.length
+                          }  Owned Pokemon`}
+                          fontFamily={FONTS.extrabold}
+                          fontSize={10}
+                          color={COLORS.grey500}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </div>
+            </View>
+          </div>
+        )}
+        <Spacer height={240} />
+        <div>
+          <View style={_homeDesktop.containerBarNonFix(_zIndexBase)}>
+            <View style={_homeDesktop.subContainerBarNonFix(_zIndexBase)}>
+              <View style={_homeDesktop.subSubContainerBarNonFix()}>
+                <View style={{ flex: 1 }} />
+                <View style={_homeDesktop.containerIconTextH()}>
+                  <IconText.H
+                    icon={() => (
+                      <PictureOutlined
+                        style={{ fontSize: 20, color: COLORS.yellowHero }}
+                      />
+                    )}
+                    label={`${
+                      mine_collection === undefined
+                        ? "..."
+                        : mine_collection.length
+                    }  Owned Pokemon`}
+                    fontFamily={FONTS.extrabold}
+                    fontSize={10}
+                    color={COLORS.grey500}
+                  />
+                </View>
+              </View>
             </View>
           </View>
-        )}
-        <Spacer height={70} />
+        </div>
         <FlatList
-          data={mine_collection.data}
+          data={mine_collection === undefined ? [] : mine_collection}
           keyExtractor={(item) => item.id}
           numColumns={2}
           style={_mobileCollection.containerFlatList(_zIndexBase)}
@@ -73,6 +135,7 @@ const MyPokemonList = {
             <CardItem
               name={item.name}
               id={item.id}
+              id_obj={item.id}
               key={`${item.name}_${item.id}`}
             />
           )}
