@@ -205,7 +205,7 @@ const PokemonDetail = {
 
         {resultData !== undefined ? (
           <View>
-            {done && (
+            {
               <>
                 <Image
                   source={resultData.sprites.front_default}
@@ -219,6 +219,7 @@ const PokemonDetail = {
                     // backgroundColor: "white",
                   }}
                 />
+
                 <View
                   style={{
                     backgroundColor: done
@@ -229,9 +230,9 @@ const PokemonDetail = {
                       window.screen.height / 2 - window.screen.height / 6 + 70,
                     zIndex: 0,
                   }}
-                ></View>
+                />
               </>
-            )}
+            }
             <View style={{ paddingHorizontal: SIZES.pagePadding }}>
               <Tabs
                 defaultActiveKey="1"
