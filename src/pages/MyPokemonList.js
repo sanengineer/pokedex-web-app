@@ -43,7 +43,7 @@ const MyPokemonList = {
         onClose: () => dispatch(deleteCollectionFailedType()),
       };
       if (mine_collection_redux.success.delete === true) {
-        toast.error("success delete from collection", options);
+        toast.success("success delete from collection", options);
       }
     }, [mine_collection_redux.success.delete, dispatch]);
 
@@ -168,7 +168,7 @@ const MyPokemonList = {
         onClose: () => dispatch(setCollectionDefaultType()),
       };
       if (mine_collection_redux.success.delete === true) {
-        toast.error("success delete from collection", options);
+        toast.success("success delete from collection", options);
       }
     }, [mine_collection_redux.success.delete, dispatch]);
 
