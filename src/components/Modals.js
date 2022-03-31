@@ -32,7 +32,7 @@ const Modals = ({
           paddingVertical: 20,
         }}
       >
-        <CardItem id={card_id} name={card_name} />
+        <CardItem id={card_id} name={card_name} disabled={true} />
         <Spacer height={10} />
         <View style={{ paddingHorizontal: 10 }}>
           <TextInput

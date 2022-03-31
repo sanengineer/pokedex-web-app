@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native-web";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Image } from "antd";
 import { useNavigate } from "react-router";
 import { COLORS, FONTS } from "../assets";
@@ -13,6 +13,7 @@ export const CardItem = ({
   style,
   widthImg,
   isNickname = false,
+  disabled = false,
   nickname,
   id_obj,
 }) => {
@@ -40,6 +41,7 @@ export const CardItem = ({
     <TouchableOpacity
       onPress={onPressCard}
       style={{ ..._card.container(done, colors, height), style }}
+      disabled={disabled}
     >
       {/* <View style={_card.container}> */}
       <View style={{ position: "absolute", right: 0, top: -13 }}>
