@@ -252,6 +252,7 @@ const PokemonDetail = {
                 position: "absolute",
                 // backgroundColor: "white",
               }}
+              alt={`image_of_${getName}`}
             />
             <View
               style={{
@@ -652,6 +653,7 @@ const PokemonDetail = {
                     <Image
                       source={resultData.sprites.front_default}
                       style={_detailDesktop.imgHeader()}
+                      alt={`image_header_of${getName}`}
                     />
                   ) : (
                     <>

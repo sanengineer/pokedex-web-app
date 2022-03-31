@@ -63,6 +63,7 @@ export const CardItem = ({
           style={_img.subContainer}
           src={`${image_link}`}
           width={widthImg}
+          alt={`image_of_${number_id}`}
         />
       </View>
       <View style={_label.container}>

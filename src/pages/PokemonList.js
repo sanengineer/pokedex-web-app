@@ -53,6 +53,7 @@ const PokemonList = {
                         preview={false}
                         width={60}
                         src={`https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png`}
+                        alt={`image_header_of_poke`}
                       />
                       <View style={{ flex: 1 }} />
                       <View style={_homeDesktop.containerIconTextH()}>
@@ -182,6 +183,7 @@ const PokemonList = {
                         preview={false}
                         width={60}
                         src={`https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png`}
+                        alt={`image_header_poke_desktop`}
                       />
                       <View style={{ flex: 1 }} />
                       <View style={_homeDesktop.containerIconTextH()}>

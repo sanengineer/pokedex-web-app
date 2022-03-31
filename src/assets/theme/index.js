@@ -33,7 +33,5 @@ export const FONTS = {
   regular: "PlusJakartaSans-Regular",
   semibold: "PlusJakartaSans-SemiBold",
   bold: "PlusJakartaSans-Bold",
-  light: "PlusJakartaSans-Light",
-  extralight: "PlusJakartaSans-ExtraLight",
   extrabold: "PlusJakartaSans-ExtraBold",
 };

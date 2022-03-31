@@ -1,38 +1,32 @@
 @font-face {
-  font-family: "PlusJakartaSans-Regular";
+  font-family: "PlusJakartaSans-Regular", system-ui;
   src: url("../src/assets/fonts/PlusJakartaSans-Regular.woff")
     format("truetype");
+  font-display: "swap";
 }
 
 @font-face {
-  font-family: "PlusJakartaSans-Medium";
+  font-family: "PlusJakartaSans-Medium", system-ui;
   src: url("../src/assets/fonts/PlusJakartaSans-Medium.woff") format("truetype");
+  font-display: "swap";
 }
 
 @font-face {
-  font-family: "PlusJakartaSans-SemiBold";
+  font-family: "PlusJakartaSans-SemiBold", system-ui;
   src: url("../src/assets/fonts/PlusJakartaSans-SemiBold.woff")
     format("truetype");
+  font-display: "swap";
 }
 
 @font-face {
-  font-family: "PlusJakartaSans-Bold";
+  font-family: "PlusJakartaSans-Bold", system-ui;
   src: url("../src/assets/fonts/PlusJakartaSans-Bold.woff") format("truetype");
+  font-display: "swap";
 }
 
 @font-face {
-  font-family: "PlusJakartaSans-Light";
-  src: url("../src/assets/fonts/PlusJakartaSans-Light.woff") format("truetype");
-}
-
-@font-face {
-  font-family: "PlusJakartaSans-ExtraLight";
-  src: url("../src/assets/fonts/PlusJakartaSans-ExtraLight.woff")
-    format("truetype");
-}
-
-@font-face {
-  font-family: "PlusJakartaSans-ExtraBold";
+  font-family: "PlusJakartaSans-ExtraBold", system-ui;
   src: url("../src/assets/fonts/PlusJakartaSans-ExtraBold.woff")
     format("truetype");
+  font-display: "swap";
 }

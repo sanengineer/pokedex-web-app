@@ -34,6 +34,7 @@ const Header = ({
             preview={false}
             width={widthHeader}
             src={`https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png`}
+            alt={`Header_Image_Logo`}
           />
         ) : (
           React.createElement(component)
