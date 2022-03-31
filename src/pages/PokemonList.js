@@ -11,7 +11,6 @@ import {
   Header,
   IconText,
   LoadingIndicator,
-  SearchBar,
   Spacer,
 } from "../components";
 import { db } from "../db";

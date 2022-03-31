@@ -23,7 +23,7 @@ export const addCollectionAction = (params) => (dispatch) => {
 
 export const addCollectionActionV1 = (params) => (dispatch) => {
   const array = store.getState().mine_collection.data;
-  if (search(params.id, array).length == 0) {
+  if (search(params.id, array).length === 0) {
     // console.log("SUCCESS_ADD_COLLECTION");
     toast.success("success add to collection");
     return dispatch(addCollectionSuccessType(params));
