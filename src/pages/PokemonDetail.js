@@ -205,34 +205,29 @@ const PokemonDetail = {
 
         {resultData !== undefined ? (
           <View>
-            {
-              <>
-                <Image
-                  source={resultData.sprites.front_default}
-                  style={{
-                    height: 200,
-                    width: 200,
-                    zIndex: 3,
-                    top: 70 + 70 / 2,
-                    transform: [{ translateX: window.screen.width / 2 / 2 }],
-                    position: "absolute",
-                    // backgroundColor: "white",
-                  }}
-                />
-
-                <View
-                  style={{
-                    backgroundColor: done
-                      ? colors.LightVibrant.hex
-                      : COLORS.yellowHero,
-                    width: "100%",
-                    height:
-                      window.screen.height / 2 - window.screen.height / 6 + 70,
-                    zIndex: 0,
-                  }}
-                />
-              </>
-            }
+            <Image
+              source={resultData.sprites.front_default}
+              style={{
+                height: 200,
+                width: 200,
+                zIndex: 3,
+                top: 70 + 70 / 2,
+                transform: [{ translateX: window.screen.width / 2 / 2 }],
+                position: "absolute",
+                // backgroundColor: "white",
+              }}
+            />
+            <View
+              style={{
+                backgroundColor: done
+                  ? colors.LightVibrant.hex
+                  : COLORS.yellowHero,
+                width: "100%",
+                height:
+                  window.screen.height / 2 - window.screen.height / 6 + 70,
+                zIndex: 0,
+              }}
+            />
             <View style={{ paddingHorizontal: SIZES.pagePadding }}>
               <Tabs
                 defaultActiveKey="1"
