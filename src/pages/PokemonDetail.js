@@ -74,6 +74,10 @@ const PokemonDetail = {
         });
     }, [getName]);
 
+    const options = {
+      onClose: () => setUnableToAdd(true),
+    };
+
     const addItemDelay = async () => {
       try {
         const _second = new Date();
@@ -86,7 +90,7 @@ const PokemonDetail = {
     const addCollectionItem = async () => {
       try {
         const id = await db.mine_collection.add(pokemonItem);
-        toast.success(`${pokemonItem.name} successfully added ${id}`);
+        toast.success(`${pokemonItem.name} successfully added ${id}`, options);
       } catch (error) {
         toast.error(
           `failed to add ${pokemonItem.name}, please try different nickname`
@@ -184,9 +188,6 @@ const PokemonDetail = {
     };
 
     const { colors, done } = useVibrant(`${match.state.link}`);
-
-    console.log("SUCCESS_ADD_DELAY:", successAddDelay);
-    console.log("LOADING_ADDD_DELAY:", loadingAddDelay);
 
     return (
       <View style={_detailMobile.container}>
