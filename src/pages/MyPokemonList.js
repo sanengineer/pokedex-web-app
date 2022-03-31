@@ -134,9 +134,11 @@ const MyPokemonList = {
           renderItem={({ item }) => (
             <CardItem
               name={item.name}
-              id={item.id}
+              id={item.id_pokemon}
               id_obj={item.id}
               key={`${item.name}_${item.id}`}
+              nickname={item.nickname}
+              isNickname={true}
             />
           )}
         />
