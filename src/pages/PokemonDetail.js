@@ -526,6 +526,10 @@ const PokemonDetail = {
         });
     }, [getName]);
 
+    const options = {
+      onClose: () => setUnableToAdd(true),
+    };
+
     const addItemDelay = async () => {
       try {
         const _second = new Date();
@@ -538,7 +542,7 @@ const PokemonDetail = {
     const addCollectionItem = async () => {
       try {
         await db.mine_collection.add(pokemonItem);
-        toast.success(`${pokemonItem.name} successfully added`);
+        toast.success(`${pokemonItem.name} successfully added`, options);
       } catch (error) {
         toast.error(
           `failed to add ${pokemonItem.name}, please try different nickname`
