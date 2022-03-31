@@ -39,6 +39,7 @@ import {
   setCollectionDefaultType,
 } from "../redux/actions";
 import pokemonService from "../services/pokemonService";
+import { getMatchPrime } from "../helper/primeNumber";
 
 const { TabPane } = Tabs;
 
@@ -50,6 +51,8 @@ const PokemonDetail = {
     const [resultData, setResultData] = useState();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [unableToAdd, setUnableToAdd] = useState(true);
+    const [loadingAddDelay, setLoadingAddDelay] = useState(false);
+    const [successAddDelay, setSuccessAddDelay] = useState();
     const getName = match.pathname.split("/")[2];
     const getFromPathName = match.state.from_pathname.split("/")[1];
     const [pokemonItem, setPokemonItem] = useState({
@@ -70,6 +73,15 @@ const PokemonDetail = {
           console.log("ERROR:" + err);
         });
     }, [getName]);
+
+    const addItemDelay = async () => {
+      try {
+        const _second = new Date();
+        return getMatchPrime(_second.getSeconds());
+      } catch (error) {
+        alert(`Error When Add ${error}`);
+      }
+    };
 
     const addCollectionItem = async () => {
       try {
@@ -128,13 +140,27 @@ const PokemonDetail = {
 
     const onPressAdd = () => {
       showModal();
-      dispatch(
-        addCollectionAction({
-          id: match.state.id,
-          image_url: resultData.sprites.front_default,
-          name: resultData.species.name,
-        })
-      );
+      setLoadingAddDelay(true);
+      setTimeout(() => {
+        addItemDelay()
+          .then((res) => {
+            if (res === true) {
+              setSuccessAddDelay(res);
+              dispatch(
+                addCollectionAction({
+                  id: match.state.id,
+                  image_url: resultData.sprites.front_default,
+                  name: resultData.species.name,
+                })
+              );
+            } else {
+              setSuccessAddDelay(res);
+            }
+          })
+          .then(() => {
+            setLoadingAddDelay(false);
+          });
+      }, 5000);
     };
 
     const onPressDelete = () => {
@@ -158,6 +184,9 @@ const PokemonDetail = {
     };
 
     const { colors, done } = useVibrant(`${match.state.link}`);
+
+    console.log("SUCCESS_ADD_DELAY:", successAddDelay);
+    console.log("LOADING_ADDD_DELAY:", loadingAddDelay);
 
     return (
       <View style={_detailMobile.container}>
@@ -443,6 +472,8 @@ const PokemonDetail = {
         )}
         <Toaster.Mobile />
         <Modals
+          isLoading={loadingAddDelay}
+          isSuccess={successAddDelay}
           onCancel={handleCancel}
           onOk={handleOk}
           visible={isModalVisible}
@@ -462,6 +493,8 @@ const PokemonDetail = {
     const [resultData, setResultData] = useState();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [unableToAdd, setUnableToAdd] = useState(true);
+    const [loadingAddDelay, setLoadingAddDelay] = useState(false);
+    const [successAddDelay, setSuccessAddDelay] = useState();
     const [pokemonItem, setPokemonItem] = useState({
       name: "",
       image_url: "",
@@ -484,6 +517,15 @@ const PokemonDetail = {
           console.log("ERROR:" + err);
         });
     }, [getName]);
+
+    const addItemDelay = async () => {
+      try {
+        const _second = new Date();
+        return getMatchPrime(_second.getSeconds());
+      } catch (error) {
+        alert(`Error When Add ${error}`);
+      }
+    };
 
     const addCollectionItem = async () => {
       try {
@@ -542,13 +584,27 @@ const PokemonDetail = {
 
     const onPressAdd = () => {
       showModal();
-      dispatch(
-        addCollectionAction({
-          id: match.state.id,
-          image_url: resultData.sprites.front_default,
-          name: resultData.species.name,
-        })
-      );
+      setLoadingAddDelay(true);
+      setTimeout(() => {
+        addItemDelay()
+          .then((res) => {
+            if (res === true) {
+              setSuccessAddDelay(res);
+              dispatch(
+                addCollectionAction({
+                  id: match.state.id,
+                  image_url: resultData.sprites.front_default,
+                  name: resultData.species.name,
+                })
+              );
+            } else {
+              setSuccessAddDelay(res);
+            }
+          })
+          .then(() => {
+            setLoadingAddDelay(false);
+          });
+      }, 5000);
     };
 
     const onPressDelete = () => {
@@ -817,6 +873,8 @@ const PokemonDetail = {
         )}
         <Toaster.Desktop />
         <Modals
+          isLoading={loadingAddDelay}
+          isSuccess={successAddDelay}
           onCancel={handleCancel}
           onOk={handleOk}
           visible={isModalVisible}

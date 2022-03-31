@@ -7,6 +7,7 @@ import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { Desktop, Mobile } from "./device";
+import { getMatchPrime } from "./helper/primeNumber";
 import store from "./redux/store";
 
 const history = createBrowserHistory({ window });
