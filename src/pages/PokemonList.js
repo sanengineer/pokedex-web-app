@@ -140,11 +140,6 @@ const PokemonList = {
             <Spacer height={50} />
           </div>
         )}
-        {/* {all_pokemon.params === undefined ? (
-          <div>it is all, nothing more 🤐</div>
-        ) : (
-          <Buttons.LG label={`loadmore`} onPress={onClickLoadMore} />
-        )} */}
         <Spacer height={20} />
       </View>
     );
@@ -265,6 +260,26 @@ const PokemonList = {
               ))}
             </View>
             <Spacer height={20} />
+            <div>
+              {all_pokemon.loading_more ? (
+                <ActivityIndicator size={`large`} color={COLORS.yellowHero} />
+              ) : (
+                <View style={_homeDesktop.containerLoadMore()}>
+                  <View style={_homeDesktop.subContainerLoadMore()}>
+                    {all_pokemon.params === undefined ? (
+                      <div>it is all, nothing more 🤐</div>
+                    ) : (
+                      <Buttons.LG
+                        label={`load more`}
+                        onPress={onClickLoadMore}
+                      />
+                    )}
+                  </View>
+                  <Spacer height={30} />
+                </View>
+              )}
+              <Spacer height={50} />
+            </div>
           </>
         )}
         <Spacer height={20} />
