@@ -4,9 +4,6 @@ import { Spacer, TextTitle } from "../components";
 
 const Section = {
   V: (props) => {
-    //debug
-    // console.log("PROPS_SECTION: ", props);
-
     return (
       <View style={sectionV.container}>
         <TextTitle title={props.title} fontSize={props.fontSizeSection} />
@@ -17,9 +14,6 @@ const Section = {
   },
 
   H: (props) => {
-    //debug
-    // console.log("PROPS_SECTION: ", props);
-
     return (
       <View style={sectionH.container}>
         <TextTitle title={props.title} fontSize={props.fontSizeSection} />

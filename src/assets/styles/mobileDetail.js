@@ -1,5 +1,5 @@
-import { COLORS, SIZES, FONTS } from "../theme";
 import { StyleSheet } from "react-native";
+import { COLORS, FONTS } from "../theme";
 
 export const _detailMobile = StyleSheet.compose({
   container: { flex: 1 },

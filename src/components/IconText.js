@@ -1,7 +1,5 @@
 import React from "react";
-import { Space } from "antd";
-import { Text, StyleSheet, View } from "react-native";
-import { COLORS, FONTS } from "../assets";
+import { StyleSheet, Text, View } from "react-native";
 import Spacer from "./Spacer";
 
 const _label = StyleSheet.compose({

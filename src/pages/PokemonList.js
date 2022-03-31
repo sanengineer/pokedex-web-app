@@ -2,8 +2,7 @@ import { PictureOutlined } from "@ant-design/icons";
 import { Image } from "antd";
 import { useLiveQuery } from "dexie-react-hooks";
 import React, { useEffect, useState } from "react";
-import { FlatList, View } from "react-native";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { COLORS, FONTS, _homeDesktop, _homeMobile } from "../assets";
 import {
@@ -31,7 +30,7 @@ const PokemonList = {
       window.removeEventListener("scroll", onScroll);
       window.addEventListener("scroll", onScroll, { passive: true });
       return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+    }, [dispatch]);
 
     const onClickLoadMore = () => {
       dispatch(getAllPokemonActionMore(all_pokemon.params));
@@ -93,7 +92,7 @@ const PokemonList = {
       window.removeEventListener("scroll", onScroll);
       window.addEventListener("scroll", onScroll, { passive: true });
       return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+    }, [dispatch]);
 
     const onClickLoadMore = () => {
       dispatch(getAllPokemonActionMore(all_pokemon.params));

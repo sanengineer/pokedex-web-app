@@ -28,10 +28,6 @@ const MyPokemonList = {
     const _zIndexBase = 0;
     const mine_collection = useSelector((state) => state.mine_collection);
 
-    const options = {
-      onClose: () => dispatch(deleteCollectionFailedType()),
-    };
-
     useEffect(() => {
       const onScroll = () => setOffset(window.scrollY);
       window.removeEventListener("scroll", onScroll);
@@ -40,10 +36,13 @@ const MyPokemonList = {
     }, []);
 
     useEffect(() => {
+      const options = {
+        onClose: () => dispatch(deleteCollectionFailedType()),
+      };
       if (mine_collection.success.delete === true) {
         toast.error("success delete from collection", options);
       }
-    }, [mine_collection.success.delete]);
+    }, [mine_collection.success.delete, dispatch]);
 
     return (
       <View style={_mobileCollection.container(_zIndexBase)}>
@@ -100,14 +99,13 @@ const MyPokemonList = {
     }, []);
 
     useEffect(() => {
+      const options = {
+        onClose: () => dispatch(setCollectionDefaultType()),
+      };
       if (mine_collection_redux.success.delete === true) {
         toast.error("success delete from collection", options);
       }
-    }, [mine_collection_redux.success.delete]);
-
-    const options = {
-      onClose: () => dispatch(setCollectionDefaultType()),
-    };
+    }, [mine_collection_redux.success.delete, dispatch]);
 
     return (
       <View style={_homeDesktop.container(_zIndexBase)}>

@@ -7,7 +7,6 @@ export const _detailDesktop = StyleSheet.compose({
     flex: 1,
     overflow: "hidden",
     backgroundColor: COLORS.red,
-    // paddingHorizontal: SIZES.pageContentDesktop,
     // backgroundColor: "red",
   }),
 

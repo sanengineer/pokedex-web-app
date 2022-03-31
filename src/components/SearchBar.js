@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TextInput } from "react-native";
-import { useNavigate, useHref } from "react-router";
+import { StyleSheet, TextInput, View } from "react-native";
+import { useNavigate } from "react-router";
 import { COLORS, FONTS } from "../assets";
 
 const styles = StyleSheet.compose({

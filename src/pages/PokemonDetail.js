@@ -49,7 +49,6 @@ const PokemonDetail = {
     const [resultData, setResultData] = useState();
     const getName = match.pathname.split("/")[2];
     const getFromPathName = match.state.from_pathname.split("/")[1];
-    const [visibleModal, setVisibleModal] = useState(false);
 
     useEffect(() => {
       pokemonService
@@ -60,11 +59,7 @@ const PokemonDetail = {
         .catch((err) => {
           console.log("ERROR:" + err);
         });
-    }, []);
-
-    const toggleModal = () => {
-      setVisibleModal(!visibleModal);
-    };
+    }, [getName]);
 
     const onPressBack = () => {
       history.back();
@@ -397,7 +392,7 @@ const PokemonDetail = {
         .catch((err) => {
           console.log("ERROR:" + err);
         });
-    }, []);
+    }, [getName]);
 
     const addCollectionItem = async () => {
       try {

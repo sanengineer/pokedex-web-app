@@ -1,11 +1,9 @@
-import React from "react";
 import { Modal } from "antd";
-import { TouchableOpacity, View, TextInput } from "react-native";
+import React from "react";
+import { TextInput, View } from "react-native";
+import { COLORS, FONTS } from "../assets";
 import { CardItem } from "./CardItem";
 import Spacer from "./Spacer";
-import { COLORS, FONTS } from "../assets";
-
-// Modal.setAppElement("#root");
 
 const Modals = ({
   visible,

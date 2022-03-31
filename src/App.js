@@ -1,4 +1,4 @@
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { createBrowserHistory } from "history";
 import React from "react";
 import { isMobile } from "react-device-detect";

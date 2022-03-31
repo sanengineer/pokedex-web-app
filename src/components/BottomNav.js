@@ -1,18 +1,14 @@
-import React from "react";
-import { IconText, Buttons, Spacer } from "../components";
 import {
-  HomeOutlined,
-  FolderOutlined,
-  SearchOutlined,
-  HomeTwoTone,
-  HomeFilled,
   FolderOpenFilled,
-  FolderTwoTone,
+  FolderOutlined,
+  HomeFilled,
+  HomeOutlined,
 } from "@ant-design/icons";
-// import { Space } from "antd";
-import { Button, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useLocation, useNavigate } from "react-router";
 import { COLORS, FONTS } from "../assets";
+import { IconText } from "../components";
 
 const styles = StyleSheet.compose({
   container: {
@@ -29,8 +25,6 @@ const styles = StyleSheet.compose({
     height: 60,
     justifyContent: "center",
     backgroundColor: COLORS.white,
-    // borderTopWidth: 0.5,
-    // borderTopColor: COLORS.yellowBlack,
     // backgroundColor: "green",
   },
   iconTextContainer: {
@@ -61,7 +55,6 @@ const _desktopNav = StyleSheet.compose({
     // backgroundColor: "green",
   },
   container: {
-    // position: "relative",
     overflow: "hidden",
     borderRadius: 6,
     margin: "auto",
@@ -76,8 +69,6 @@ const _desktopNav = StyleSheet.compose({
     height: 60,
     justifyContent: "center",
     backgroundColor: COLORS.white,
-    // borderTopWidth: 0.5,
-    // borderTopColor: COLORS.yellowBlack,
     // backgroundColor: "green",
   },
   iconTextContainer: {
@@ -112,99 +103,6 @@ const BottomNav = {
 
     const hiddenBar =
       match.pathname === "/" || match.pathname === "/mine" ? true : false;
-
-    // const active = window.location.pathname === match.pathname;
-    // const color = active ? COLORS.yellowBlack : COLORS.grey;
-
-    //debug_all
-    // console.log("MATCH: ", match.pathname);
-
-    return (
-      <>
-        {hiddenBar ? (
-          <View style={styles.container}>
-            <View style={styles.subContainer}>
-              <View style={styles.iconTextContainer}>
-                <TouchableOpacity
-                  onPress={onPressHome}
-                  style={styles.containerTouch}
-                >
-                  <IconText.V
-                    label="Home"
-                    fontFamily={
-                      match.pathname === "/" ? FONTS.extrabold : FONTS.regular
-                    }
-                    color={
-                      match.pathname === "/"
-                        ? COLORS.yellowHero
-                        : COLORS.grey100
-                    }
-                    icon={() =>
-                      match.pathname === "/" ? (
-                        <HomeFilled
-                          style={styles.icon(COLORS.yellowHero)}
-                          // twoToneColor={COLORS.yellowHero}
-                        />
-                      ) : (
-                        <HomeOutlined style={styles.icon(COLORS.grey100)} />
-                      )
-                    }
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={onPressMine}
-                  style={styles.containerTouch}
-                >
-                  <IconText.V
-                    fontFamily={
-                      match.pathname === "/mine"
-                        ? FONTS.extrabold
-                        : FONTS.regular
-                    }
-                    label="Mine"
-                    color={
-                      match.pathname === "/mine"
-                        ? COLORS.yellowHero
-                        : COLORS.grey100
-                    }
-                    icon={() =>
-                      match.pathname === "/mine" ? (
-                        <FolderOpenFilled
-                          style={styles.icon(COLORS.yellowHero)}
-                        />
-                      ) : (
-                        <FolderOutlined style={styles.icon(COLORS.grey100)} />
-                      )
-                    }
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        ) : null}
-      </>
-    );
-  },
-  Mobile: () => {
-    const navigate = useNavigate();
-    const match = useLocation();
-
-    const onPressHome = () => {
-      navigate("..");
-    };
-
-    const onPressMine = () => {
-      navigate("../mine");
-    };
-
-    const hiddenBar =
-      match.pathname === "/" || match.pathname === "/mine" ? true : false;
-
-    // const active = window.location.pathname === match.pathname;
-    // const color = active ? COLORS.yellowBlack : COLORS.grey;
-
-    //debug_all
-    // console.log("MATCH: ", match.pathname);
 
     return (
       <>
@@ -286,12 +184,6 @@ const BottomNav = {
 
     const hiddenBar =
       match.pathname === "/" || match.pathname === "/mine" ? true : false;
-
-    // const active = window.location.pathname === match.pathname;
-    // const color = active ? COLORS.yellowBlack : COLORS.grey;
-
-    //debug_all
-    // console.log("MATCH: ", match.pathname);
 
     return (
       <>
