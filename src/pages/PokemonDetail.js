@@ -18,7 +18,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import useVibrant from "useVibrant";
+import useVibrant from "use-vibrant-hooks";
 import { COLORS, FONTS, SIZES, _detailDesktop, _detailMobile } from "../assets";
 import {
   Buttons,

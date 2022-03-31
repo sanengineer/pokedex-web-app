@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Image } from "antd";
 import { useNavigate } from "react-router";
 import { COLORS, FONTS } from "../assets";
-import useVibrant from "useVibrant";
+import useVibrant from "use-vibrant-hooks";
 
 export const CardItem = ({
   id,
