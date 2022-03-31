@@ -89,8 +89,8 @@ const PokemonDetail = {
 
     const addCollectionItem = async () => {
       try {
-        const id = await db.mine_collection.add(pokemonItem);
-        toast.success(`${pokemonItem.name} successfully added ${id}`, options);
+        await db.mine_collection.add(pokemonItem);
+        toast.success(`${pokemonItem.name} successfully added`, options);
       } catch (error) {
         toast.error(
           `failed to add ${pokemonItem.name}, please try different nickname`
@@ -122,6 +122,7 @@ const PokemonDetail = {
 
     const handleCancel = () => {
       setIsModalVisible(false);
+      setUnableToAdd(true);
     };
 
     const handleChange = (e) => {
@@ -535,8 +536,8 @@ const PokemonDetail = {
 
     const addCollectionItem = async () => {
       try {
-        const id = await db.mine_collection.add(pokemonItem);
-        toast.success(`${pokemonItem.name} successfully added ${id}`);
+        await db.mine_collection.add(pokemonItem);
+        toast.success(`${pokemonItem.name} successfully added`);
       } catch (error) {
         toast.error(
           `failed to add ${pokemonItem.name}, please try different nickname`
@@ -568,6 +569,7 @@ const PokemonDetail = {
 
     const handleCancel = () => {
       setIsModalVisible(false);
+      setUnableToAdd(true);
     };
 
     const handleChange = (e) => {
