@@ -227,7 +227,35 @@ const PokemonDetail = {
                   window.screen.height / 2 - window.screen.height / 6 + 70,
                 zIndex: 0,
               }}
-            />
+            >
+              {match.state.nickname !== undefined && (
+                <View
+                  style={{
+                    position: "absolute",
+                    bottom: 20,
+                    right: 20,
+                    backgroundColor: COLORS.blackTransparent,
+                    paddingHorizontal: 10,
+                    paddingVertical: 3,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 6,
+                  }}
+                >
+                  <Text
+                    style={{
+                      textTransform: "capitalize",
+                      fontSize: 12,
+                      fontFamily: FONTS.bold,
+                      color: COLORS.yellowBlack100,
+                    }}
+                  >
+                    {match.state.nickname}
+                  </Text>
+                </View>
+              )}
+            </View>
+
             <View style={{ paddingHorizontal: SIZES.pagePadding }}>
               <Tabs
                 defaultActiveKey="1"
