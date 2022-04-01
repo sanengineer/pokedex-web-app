@@ -26,6 +26,9 @@ export const COLORS = {
   blueHero: "#0071c2",
   yellowBlack: "#a17e00",
   yellowBlack100: "#705800",
+  FitContrastRatio: {
+    black: "#5b5858",
+  },
 };
 
 export const FONTS = {

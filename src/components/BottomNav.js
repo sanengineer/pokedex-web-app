@@ -199,7 +199,9 @@ const BottomNav = {
                     <IconText.V
                       label="Home"
                       fontFamily={
-                        match.pathname === "/" ? FONTS.extrabold : FONTS.regular
+                        match.pathname === "/"
+                          ? FONTS.extrabold
+                          : FONTS.extrabold
                       }
                       color={
                         match.pathname === "/"
@@ -229,7 +231,7 @@ const BottomNav = {
                       fontFamily={
                         match.pathname === "/mine"
                           ? FONTS.extrabold
-                          : FONTS.regular
+                          : FONTS.extrabold
                       }
                       label="Mine"
                       fontSize={10}

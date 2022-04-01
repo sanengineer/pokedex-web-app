@@ -19,14 +19,14 @@ const _buttonLG = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: COLORS.grey,
-    // backgroundColor: "red",
+    borderColor: COLORS.blackTransparent,
+    backgroundColor: COLORS.grey,
   },
   label: {
     textAlign: "center",
     fontSize: 12,
-    fontFamily: FONTS.medium,
-    color: COLORS.grey200,
+    fontFamily: FONTS.bold,
+    color: COLORS.FitContrastRatio.black,
   },
 });
 
