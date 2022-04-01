@@ -165,8 +165,6 @@ const PokemonList = {
       dispatch(getAllPokemonActionMore(all_pokemon.params));
     };
 
-    console.log("LOADING_MORE:", all_pokemon.loading_more);
-
     return (
       <View style={_homeDesktop.container(_zIndexBase)}>
         <View style={_homeDesktop.containerHeader(_zIndexBase)}>
