@@ -3,13 +3,12 @@ import { COLORS, FONTS } from "../theme";
 
 export const _detailMobile = StyleSheet.compose({
   container: { flex: 1 },
-  subContainer: (done, colors) => ({
+  subContainer: () => ({
     flexDirection: "row",
     paddingVertical: 10,
     paddingHorizontal: 10,
     position: "fixed",
     width: "100%",
-    backgroundColor: done && colors.LightVibrant.hex,
     zIndex: 1,
     // backgroundColor: "green",
   }),
@@ -29,15 +28,15 @@ export const _detailMobile = StyleSheet.compose({
     // backgroundColor: "red",
   },
 
-  titlePage: (done, colors) => ({
+  titlePage: () => ({
     fontSize: 20,
     textTransform: "capitalize",
-    color: done ? colors.DarkVibrant.hex : COLORS.black,
+    color: COLORS.black,
     fontFamily: FONTS.bold,
   }),
 
-  iconBack: (done, colors) => ({
+  iconBack: () => ({
     fontSize: 30,
-    color: done ? colors.DarkVibrant.hex : COLORS.black,
+    color: COLORS.black,
   }),
 });

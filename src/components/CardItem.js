@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Image } from "antd";
 import { useNavigate } from "react-router";
 import { COLORS, FONTS } from "../assets";
-import useVibrant from "../lib/useVibrant";
 
 export const CardItem = ({
   id,
@@ -35,20 +34,17 @@ export const CardItem = ({
   const image_link = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${_id}.png`;
   const number_id = _id < 10 ? `00${_id}` : _id < 100 ? `0${_id}` : _id;
 
-  const { colors, done } = useVibrant(`${image_link}`);
-
   return (
     <TouchableOpacity
       onPress={onPressCard}
-      style={{ ..._card.container(done, colors, height), style }}
+      style={{ ..._card.container(height), style }}
       disabled={disabled}
     >
-      {/* <View style={_card.container}> */}
       <View style={{ position: "absolute", right: 0, top: -13 }}>
         <Text
           style={{
             fontSize: 50,
-            color: done ? COLORS.white : COLORS.grey,
+            color: COLORS.grey,
             opacity: 0.5,
             fontFamily: FONTS.extrabold,
             letterSpacing: -5,
@@ -67,22 +63,18 @@ export const CardItem = ({
         />
       </View>
       <View style={_label.container}>
-        <Text style={_label.text(done, colors, fontSize)}>{name}</Text>
-        {isNickname && (
-          <Text style={_label.subtext(done, colors, 8)}>({nickname})</Text>
-        )}
+        <Text style={_label.text(fontSize)}>{name}</Text>
+        {isNickname && <Text style={_label.subtext(8)}>({nickname})</Text>}
       </View>
-      {/* </View> */}
     </TouchableOpacity>
   );
 };
 
 const _card = StyleSheet.compose({
-  container: (done, colors, height) => ({
+  container: (height) => ({
     height: height,
-    // width: "50%",
-    borderColor: done ? colors.Vibrant.hex : COLORS.grey,
-    borderWidth: done ? 0 : 1,
+    borderColor: COLORS.grey,
+    borderWidth: 1,
     flex: 1,
     flexDirection: "column",
     marginHorizontal: 10,
@@ -90,7 +82,7 @@ const _card = StyleSheet.compose({
     alignItem: "center",
     justifyContent: "center",
     borderRadius: 8,
-    backgroundColor: done ? colors.LightVibrant.hex : COLORS.white,
+    backgroundColor: COLORS.white,
     overflow: "hidden",
     // zIndex: 0,
     // backgroundColor: "orange",
@@ -105,8 +97,6 @@ const _img = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
     borderRadius: 8,
-    // zIndex: 1,
-    // backgroundColor: COLORS.yellow100,
     // backgroundColor: "aqua",
   },
   subContainer: {
@@ -128,20 +118,18 @@ const _label = StyleSheet.compose({
     borderRadius: 8,
     backgroundColor: COLORS.blackTransparent,
   },
-  text: (done, colors, fontSize) => ({
+  text: (fontSize) => ({
     textTransform: "capitalize",
     fontSize: fontSize,
-    // color: done ? colors.DarkVibrant.hex : COLORS.black,
-    color: done ? COLORS.white : COLORS.black,
+    color: COLORS.black,
     fontFamily: FONTS.extrabold,
     textAlign: "center",
   }),
-  subtext: (done, colors, fontSize) => ({
+  subtext: (fontSize) => ({
     marginTop: 4,
     textTransform: "capitalize",
     fontSize: fontSize,
-    // color: done ? colors.DarkVibrant.hex : COLORS.black,
-    color: done ? COLORS.white : COLORS.black,
+    color: COLORS.black,
     fontFamily: FONTS.medium,
     textAlign: "center",
   }),

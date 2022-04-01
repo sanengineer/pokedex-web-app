@@ -18,7 +18,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import useVibrant from "../lib/useVibrant";
 import { COLORS, FONTS, SIZES, _detailDesktop, _detailMobile } from "../assets";
 import {
   Buttons,
@@ -188,24 +187,18 @@ const PokemonDetail = {
       });
     };
 
-    const { colors, done } = useVibrant(`${match.state.link}`);
-
     return (
       <View style={_detailMobile.container}>
-        <View style={_detailMobile.subContainer(done, colors)}>
+        <View style={_detailMobile.subContainer()}>
           <View style={_detailMobile.containerBack}>
             <TouchableOpacity onPress={onPressBack} style={{ padding: 10 }}>
-              <LeftSquareOutlined
-                style={_detailMobile.iconBack(done, colors)}
-              />
+              <LeftSquareOutlined style={_detailMobile.iconBack()} />
             </TouchableOpacity>
           </View>
           <Spacer width={10} />
           <View style={_detailMobile.containerSearch}>
             <View style={_detailMobile.containerTitlePage}>
-              <Text style={_detailMobile.titlePage(done, colors)}>
-                {getName}
-              </Text>
+              <Text style={_detailMobile.titlePage()}>{getName}</Text>
             </View>
           </View>
           <View style={_detailMobile.containerBack}>
@@ -215,15 +208,11 @@ const PokemonDetail = {
                   onPress={onPressDelete}
                   style={{ padding: 10 }}
                 >
-                  <DeleteOutlined
-                    style={_detailMobile.iconBack(done, colors)}
-                  />
+                  <DeleteOutlined style={_detailMobile.iconBack()} />
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity onPress={onPressAdd} style={{ padding: 10 }}>
-                  <PlusCircleOutlined
-                    style={_detailMobile.iconBack(done, colors)}
-                  />
+                  <PlusCircleOutlined style={_detailMobile.iconBack()} />
                 </TouchableOpacity>
               )
             ) : (
@@ -256,9 +245,7 @@ const PokemonDetail = {
             />
             <View
               style={{
-                backgroundColor: done
-                  ? colors.LightVibrant.hex
-                  : COLORS.yellowHero,
+                backgroundColor: COLORS.yellowHero,
                 width: "100%",
                 height:
                   window.screen.height / 2 - window.screen.height / 6 + 70,
@@ -640,15 +627,13 @@ const PokemonDetail = {
       });
     };
 
-    const { colors, done } = useVibrant(`${match.state.link}`);
-
     return (
       <View style={_detailDesktop.container(_zIndexBase)}>
         <View style={_detailDesktop.containerHeader(_zIndexBase)}>
           <Header
             widthHeader={_widhtHeader}
             top={-10}
-            bgColor={done ? colors.LightVibrant.hex : COLORS.yellowHero}
+            bgColor={COLORS.yellowHero}
             isImage={false}
             component={() => {
               return (
