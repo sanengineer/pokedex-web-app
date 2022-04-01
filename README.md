@@ -1,6 +1,6 @@
 # Create Pokedex Web App With React Native For Web
 
-![Pokedex App](https://res.cloudinary.com/dsv9w1ey3/image/upload/v1648692381/github%20video/Pokedex_PWA_Preview_1_fkfbty.gif)
+![Pokedex Web App - React Native For Web](https://res.cloudinary.com/dsv9w1ey3/image/upload/v1648798133/github%20video/Pokedex_Lite_Preview_ohe5zz.gif)
 
 Stack Tech Used:
 
