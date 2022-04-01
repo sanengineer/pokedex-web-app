@@ -20,11 +20,12 @@ const styles = StyleSheet.compose({
     shadowOpacity: 1,
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 10,
+    height: "calc(env(safe-area-inset-bottom) + 55px)",
+    backgroundColor: COLORS.white,
   },
   subContainer: {
-    height: 60,
-    justifyContent: "center",
-    backgroundColor: COLORS.white,
+    // height: 60,
+    // justifyContent: "center",
     // backgroundColor: "green",
   },
   iconTextContainer: {
@@ -117,7 +118,7 @@ const BottomNav = {
                   <IconText.V
                     label="Home"
                     fontFamily={
-                      match.pathname === "/" ? FONTS.extrabold : FONTS.regular
+                      match.pathname === "/" ? FONTS.extrabold : FONTS.extrabold
                     }
                     color={
                       match.pathname === "/"
@@ -144,7 +145,7 @@ const BottomNav = {
                     fontFamily={
                       match.pathname === "/mine"
                         ? FONTS.extrabold
-                        : FONTS.regular
+                        : FONTS.extrabold
                     }
                     label="Mine"
                     color={
